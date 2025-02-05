@@ -51,6 +51,14 @@ const updateSong = async (req, res) => {
     res.status(404).json(error);
   }
 };
+// ADDING SONG TO ARTIST
+const addArtistToSong = function (tutorialId, tag) {
+  return db.Tutorial.findByIdAndUpdate(
+    tutorialId,
+    { $push: { tags: tag._id } },
+    { new: true, useFindAndModify: false }
+  );
+};
 
 // const songSchema = new Schema({
 //     title: { type: String, required: true },

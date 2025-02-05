@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const DB_URL = process.env.DB_URL;
 
 const songsRoutes = require("./routes/songs");
+const artistsRoutes = require("./routes/artists");
 
 // Add the body field to request
 app.use(express.json());
@@ -21,6 +22,7 @@ mongoose
 
 // Routes
 app.use("/api/songs", songsRoutes);
+app.use("/api/artists", artistsRoutes);
 
 app.listen(5000, () => {
   console.log("Listening to port 5000");
