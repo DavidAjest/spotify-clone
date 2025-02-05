@@ -1,9 +1,19 @@
 const songModel = require("../models/songModel");
+const Artist = require("../models/artistModel");
 
 const createSong = async (req, res) => {
   try {
     const song = await songModel.create({ ...req.body });
     console.log("The song that was created: ", song);
+
+    for (const artistId of song.artists) {
+      await Artist.findByIdAndUpdate(
+        artistId,
+        { $push: { songs: song._id } },
+        { new: true, useFindAndModify: false }
+      );
+    }
+
     res.status(200).json(song);
   } catch (error) {
     res.status(404).json(error);

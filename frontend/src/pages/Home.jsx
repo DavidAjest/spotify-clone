@@ -1,10 +1,38 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ArtistsContext } from "../context/ArtistContext";
 import CardActionArtist from "../components/CardActionArtist";
+// import { SongsContext } from "../context/SongContext";
 import "../index.css";
 
 function Home() {
   const { artists, dispatch } = useContext(ArtistsContext);
+  // const { songs, dispatch } = useContext(SongsContext);
+
+  // useEffect(() => {
+  //   const fetchSongs = async () => {
+  //     const response = await fetch("/api/songs");
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       dispatch({ type: "SET_SONGS", payload: json });
+  //     }
+  //   };
+
+  //   fetchSongs();
+  // }, [dispatch]);
+
+  useEffect(() => {
+    const fetchArtists = async () => {
+      const response = await fetch("/api/artists");
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_ARTISTS", payload: json });
+      }
+    };
+
+    fetchArtists();
+  }, [dispatch]);
 
   return (
     <main className="container-home-grid">

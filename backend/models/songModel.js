@@ -11,7 +11,7 @@ const songSchema = new Schema({
     type: String,
     required: true,
   },
-  url: {
+  urlOfSong: {
     type: String,
     required: true,
   },

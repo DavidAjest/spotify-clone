@@ -1,0 +1,41 @@
+[
+  {
+    "followers": { "href": null, "total": 67269815 },
+    "genres": [],
+    "image": {
+      "url": "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+      "height": 640,
+      "width": 640
+    },
+    "name": "Bruno Mars",
+    "popularity": 94,
+    "type": "artist",
+    "songs": []
+  },
+  {
+    "followers": { "href": null, "total": 118902348 },
+    "genres": ["soft pop"],
+    "image": {
+      "url": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+      "height": 640,
+      "width": 640
+    },
+    "name": "Ed Sheeran",
+    "popularity": 86,
+    "type": "artist",
+    "songs": []
+  },
+  {
+    "followers": { "href": null, "total": 33437804 },
+    "genres": [],
+    "image": {
+      "url": "https://i.scdn.co/image/ab6761610000e5ebf7db7c8ede90a019c54590bb",
+      "height": 640,
+      "width": 640
+    },
+    "name": "Harry Styles",
+    "popularity": 82,
+    "type": "artist",
+    "songs": []
+  }
+]

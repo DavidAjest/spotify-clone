@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Bruno Mars",
+    "type": "artist",
+    "albums": [],
+    "image": "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+    "songs": [],
+    "followers": 67269815,
+    "monthlyListeners": null,
+    "genres": [],
+    "popularity": 94
+  },
+  {
+    "name": "Ed Sheeran",
+    "type": "artist",
+    "albums": [],
+    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "songs": [],
+    "followers": 118902348,
+    "monthlyListeners": null,
+    "genres": ["soft pop"],
+    "popularity": 86
+  },
+  {
+    "name": "Harry Styles",
+    "type": "artist",
+    "albums": [],
+    "image": "https://i.scdn.co/image/ab6761610000e5ebf7db7c8ede90a019c54590bb",
+    "songs": [],
+    "followers": 33437804,
+    "monthlyListeners": null,
+    "genres": [],
+    "popularity": 82
+  }
+]
