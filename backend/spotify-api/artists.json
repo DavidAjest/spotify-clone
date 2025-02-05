@@ -1,0 +1,30 @@
+{
+  "external_urls": {
+    "spotify": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C"
+  },
+  "followers": { "href": null, "total": 67269815 },
+  "genres": [],
+  "href": "https://api.spotify.com/v1/artists/0du5cEVh5yTK9QJze8zA0C",
+  "id": "0du5cEVh5yTK9QJze8zA0C",
+  "images": [
+    {
+      "url": "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
+      "height": 640,
+      "width": 640
+    },
+    {
+      "url": "https://i.scdn.co/image/ab67616100005174c36dd9eb55fb0db4911f25dd",
+      "height": 320,
+      "width": 320
+    },
+    {
+      "url": "https://i.scdn.co/image/ab6761610000f178c36dd9eb55fb0db4911f25dd",
+      "height": 160,
+      "width": 160
+    }
+  ],
+  "name": "Bruno Mars",
+  "popularity": 94,
+  "type": "artist",
+  "uri": "spotify:artist:0du5cEVh5yTK9QJze8zA0C"
+}
