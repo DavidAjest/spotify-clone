@@ -23,6 +23,7 @@ const createArtist = async (req, res) => {
 const showAllArtists = async (req, res) => {
   try {
     const artists = await artistModel.find();
+    console.log("these are the artists:", artists);
     res.status(200).json(artists);
   } catch (error) {
     res.status(404).json(error);

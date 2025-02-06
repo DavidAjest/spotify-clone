@@ -9,6 +9,8 @@ const songsRoutes = require("./routes/songs");
 const artistsRoutes = require("./routes/artists");
 
 // Add the body field to request
+const cors = require("cors");
+app.use(cors()); // Enable CORS
 app.use(express.json());
 // Connect to db
 mongoose

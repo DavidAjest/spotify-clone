@@ -26,10 +26,7 @@ export default function CardActionArtist({ artist }) {
         <CardContent>
           <Box sx={{ width: "100%", maxWidth: 500 }}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              <Link style={{ textDecoration: "none", color: "inherit" }}>
-                {artist.firstName} <br></br>
-              </Link>
-              Artist
+              {artist.artist}
             </Typography>
           </Box>
         </CardContent>
