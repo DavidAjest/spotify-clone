@@ -1,0 +1,81 @@
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { ArtistsContext } from "../context/ArtistContext";
+import "../index.css";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import MediaControlCard from "../components/MediaControlCard";
+
+function AboutArtist() {
+  const { id } = useParams(); // Extract the artist ID from the URL parameters
+  const { artists } = useContext(ArtistsContext); // Access the artists from the context
+
+  // Find the artist by ID from the context
+  const artist = artists.find((artist) => artist._id === id);
+
+  // If the artist data is not found, display a loading message
+  if (!artist) {
+    return <div>Loading...</div>;
+  }
+
+  // Render the artist details once the data is found
+  return (
+    <main className="container-home-grid">
+      <div className="your-library-grid-item">
+        <h2>Your Library</h2>
+      </div>
+      <Box
+        component="section"
+        sx={{
+          position: "relative", // Set position to relative to contain the absolute positioned elements
+          display: "flex",
+          backgroundColor: "blueviolet",
+          width: "100%", // Make the Box full width
+
+          overflow: "hidden", // Hide overflow to ensure the image fits within the Box
+        }}
+      >
+        <img
+          style={{
+            width: "100%", // Make the image full width
+            height: "100%", // Make the image full height
+            objectFit: "cover", // Cover the entire Box area
+            objectPosition: "center 30%", // Focus slightly down from the top
+          }}
+          src={artist.image}
+          alt={artist.name}
+        />
+        <Box
+          sx={{
+            position: "absolute", // Position the text absolutely within the relative Box
+            top: "50%", // Center the text vertically
+            left: "50%", // Center the text horizontally
+            transform: "translate(-50%, -50%)", // Adjust the position to truly center the text
+            color: "white", // Set the text color to white
+            textAlign: "center", // Center align the text
+            zIndex: 1, // Ensure the text is above the image
+          }}
+        >
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            {artist.name}
+          </Typography>
+          <Typography variant="h5">{artist.type}</Typography>
+        </Box>
+      </Box>
+      <Box
+        component="section"
+        className="grid-bottom-right-cell-about"
+        sx={{ display: "grid", backgroundColor: "ghostwhite", color: "black" }}
+      >
+        <MediaControlCard artist={artist} />
+        <div> sdsd</div>
+        <div> sdsd</div>
+        <div> sdsd</div>
+        <div> sdsd</div>
+        <div> sdsd</div>
+      </Box>
+    </main>
+  );
+}
+
+export default AboutArtist;

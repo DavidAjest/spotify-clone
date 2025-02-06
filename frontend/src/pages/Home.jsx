@@ -13,11 +13,11 @@ function Home() {
 
       const json = await response.json();
       console.log("this is json", json);
-      // if (response.ok) {
-      //   dispatch({ type: "SET_ARTISTS", payload: json });
-      // } else {
-      //   console.log(response.status);
-      // }
+      if (response.ok) {
+        dispatch({ type: "SET_ARTISTS", payload: json });
+      } else {
+        console.log(response.status);
+      }
     };
 
     fetchArtists();
@@ -41,7 +41,7 @@ function Home() {
         </div>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {artists.map((artist) => {
-            return <CardActionArtist key={artist.id} artist={artist} />;
+            return <CardActionArtist key={artist._id} artist={artist} />;
           })}
         </div>
       </div>
@@ -58,7 +58,7 @@ function Home() {
         </div>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {artists.map((artist) => {
-            return <CardActionArtist key={artist.id} artist={artist} />;
+            return <CardActionArtist key={artist._id} artist={artist} />;
           })}
         </div>
       </div>

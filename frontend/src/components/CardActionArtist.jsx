@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function CardActionArtist({ artist }) {
   return (
     <Card sx={{ width: "18%", minWidth: "150px", m: 2 }}>
-      <CardActionArea component={Link} to={`/api/artists/${artist.id}`}>
+      <CardActionArea component={Link} to={`/api/artists/${artist._id}`}>
         <CardMedia
           style={{
             borderRadius: "50%", // Makes the image round
@@ -20,13 +20,16 @@ export default function CardActionArtist({ artist }) {
           className="img-artist-home"
           component="img"
           height="200"
-          image={artist.imgURL}
+          image={artist.image}
           alt="green iguana"
         />
         <CardContent>
           <Box sx={{ width: "100%", maxWidth: 500 }}>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {artist.artist}
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              {artist.name}
+            </Typography>
+            <Typography variant="h7" sx={{ color: "text.secondary" }}>
+              {artist.type}
             </Typography>
           </Box>
         </CardContent>

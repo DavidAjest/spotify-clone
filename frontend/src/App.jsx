@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 
+//pages
+import Home from "./pages/Home";
+import AboutArtist from "./pages/AboutArtist";
+
+// Compoenets
 import Navbar from "./components/Navbar";
 
 import "./App.css";
@@ -13,6 +17,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/home" element={<Home />} />
+            <Route path="/api/artists/:id" element={<AboutArtist />} />
           </Routes>
         </div>
       </BrowserRouter>

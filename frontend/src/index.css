@@ -69,6 +69,21 @@ button:focus-visible {
   height: 100vh;
   width: 100%;
 }
+.container-about-grid {
+  margin-top: 4%;
+  margin-bottom: 1%;
+  display: grid;
+  grid-template: 40% 60% / 30% 70%;
+  background-color: tomato;
+  height: 100vh;
+  width: 100%;
+  /* gap: 13px; */
+  background-color: green;
+}
+
+.grid-bottom-right-cell-about {
+  grid-template: 40% 20% 20% 20% / 80% 13% 7%;
+}
 
 .topic-popular-artists-grid-item {
   background-color: #213547;
