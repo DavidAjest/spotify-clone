@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArtistsContext } from "../context/ArtistContext";
 import "../index.css";
@@ -20,7 +20,7 @@ function AboutArtist() {
 
   // Render the artist details once the data is found
   return (
-    <main className="container-home-grid">
+    <main className="container-about-grid">
       <div className="your-library-grid-item">
         <h2>Your Library</h2>
       </div>
@@ -64,15 +64,17 @@ function AboutArtist() {
       </Box>
       <Box
         component="section"
-        className="grid-bottom-right-cell-about"
-        sx={{ display: "grid", backgroundColor: "ghostwhite", color: "black" }}
+        className="flex-bottom-right-cell-about"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "ghostwhite",
+          color: "black",
+        }}
       >
-        <MediaControlCard artist={artist} />
-        <div> sdsd</div>
-        <div> sdsd</div>
-        <div> sdsd</div>
-        <div> sdsd</div>
-        <div> sdsd</div>
+        {artist.songs.map((song) => {
+          return <MediaControlCard key={song._id} song={song} />;
+        })}
       </Box>
     </main>
   );

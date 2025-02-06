@@ -12,7 +12,7 @@ function Home() {
       const response = await fetch("http://localhost:5000/api/artists");
 
       const json = await response.json();
-      console.log("this is json", json);
+
       if (response.ok) {
         dispatch({ type: "SET_ARTISTS", payload: json });
       } else {
