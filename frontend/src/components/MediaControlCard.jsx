@@ -27,7 +27,7 @@ export default function MediaControlCard({ song }) {
           <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
         </IconButton>
         {/* <IconButton aria-label="next">
-            {theme.direction === "rtl" ? (
+            {theme.dire ction === "rtl" ? (
               <SkipPreviousIcon />
             ) : (
               <SkipNextIcon />
