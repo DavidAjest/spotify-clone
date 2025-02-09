@@ -23,6 +23,7 @@ const createArtist = async (req, res) => {
 const showAllArtists = async (req, res) => {
   try {
     const artists = await artistModel.find().populate("songs");
+    console.log("this is the artist from BACKEND", artists);
 
     console.log("these are the artists:", artists);
     res.status(200).json(artists);
@@ -44,7 +45,7 @@ const deleteArtist = async (req, res) => {
 const showArtistById = async (req, res) => {
   try {
     const { id } = req.params;
-    const artist = await artistModel.find({ _id: id });
+    const artist = await artistModel.find({ _id: id }).populate("songs");
     res.status(200).json(artist);
   } catch (error) {
     res.status(404).json(error);
