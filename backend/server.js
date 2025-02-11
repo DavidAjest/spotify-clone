@@ -46,10 +46,8 @@ app.post("/refresh", (req, res) => {
       console.log(err);
     });
 });
-console.log("THIS IS THE REDIRECT_URI", process.env.REDIRECT_URI);
-console.log("THIS IS THE CLIENT_ID", process.env.CLIENT_ID);
-console.log("THIS IS THE CLIENT_SECRET", process.env.CLIENT_SECRET);
 
+// SPOTIFY
 app.post("/login", (req, res) => {
   const code = req.body.code;
 

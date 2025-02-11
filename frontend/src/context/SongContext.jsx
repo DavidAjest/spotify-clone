@@ -1,29 +1,55 @@
-// import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 
-// export const SongsContext = createContext();
+// Create a new context for songs
+export const SongsContext = createContext();
 
-// export const songReducer = (state, action) => {
-//   switch (action.type) {
-//     case "SET_SONGS":
-//       return { ...state, artists: action.payload };
-//     default:
-//       return state;
-//   }
-// };
+// Define a reducer to manage song state
+export const songReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_SONG":
+      return { ...state, currentSong: action.payload };
+    case "PLAY_SONG":
+      return { ...state, isPlaying: true };
+    case "PAUSE_SONG":
+      return { ...state, isPlaying: false };
+    default:
+      return state;
+  }
+};
 
-// export const ArtistContextProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(artistReducer, {
-//     artists: [],
-//   });
+// Create a provider component for the song context
+export const SongContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(songReducer, {
+    currentSong: null,
+    isPlaying: false,
+  });
 
-//   return (
-//     <ArtistsContext.Provider
-//       value={{
-//         ...state,
-//         dispatch,
-//       }}
-//     >
-//       {children}
-//     </ArtistsContext.Provider>
-//   );
-// };
+  const [played, setPlayed] = useState(0);
+  const [loaded, setLoaded] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const handleProgress = ({ played, loaded }) => {
+    setPlayed(played);
+    setLoaded(loaded);
+  };
+
+  const handleDuration = (duration) => {
+    setDuration(duration);
+  };
+
+  return (
+    <SongsContext.Provider
+      value={{
+        ...state,
+        dispatch,
+        played,
+        loaded,
+        duration,
+        handleProgress,
+        handleDuration,
+      }}
+    >
+      {children}
+    </SongsContext.Provider>
+  );
+};

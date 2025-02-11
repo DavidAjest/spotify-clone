@@ -16,7 +16,7 @@ function AboutArtist() {
   useEffect(() => {
     async function getArtistById() {
       const artist = artists.find((artist) => artist._id === id);
-      console.log("this is the song", artist);
+
       if (!artist) {
         const response = await fetch(`http://localhost:5000/api/artists/${id}`);
 

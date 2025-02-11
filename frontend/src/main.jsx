@@ -3,19 +3,22 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { ArtistContextProvider } from "./context/ArtistContext";
-import CssBaseline from "@mui/material/CssBaseline";
-import Login from "./components/Login.jsx";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import Login from "./components/Login.jsx";
+import { SongContextProvider } from "./context/SongContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ArtistContextProvider>
-      {/* <CssBaseline /> */}
-      <App />
+      <SongContextProvider>
+        {/* <CssBaseline /> */}
+        <App />
+      </SongContextProvider>
     </ArtistContextProvider>
   </StrictMode>
 );
 
-//   // <StrictMode> {/* </StrictMode> */} needs to be around everything --> dispabled becouse cousing issue with spotify api getting the code
+//   // <StrictMode> {/* </StrictMode> */} needs to be around everything --> dispabled becouse cousing issue with spotify api getting the code twice
 
 // Error during authorization code grant: WebapiAuthenticationError: An authentication error occurred while communicating with Spotify's Web API.
 // Details: invalid_grant Invalid authorization code.
