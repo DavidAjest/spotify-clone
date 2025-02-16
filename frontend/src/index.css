@@ -19,7 +19,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  text-decoration: underline;
 }
 
 body {
@@ -27,8 +27,9 @@ body {
   display: flex;
   place-items: center;
 
-  min-width: 320px;
+  min-width: 1200px;
   min-height: 100vh;
+  background-color: black;
 }
 
 h1 {
@@ -47,13 +48,13 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+/* button:hover {
   border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 .topic-popular-artists {
   text-align: left;
@@ -64,17 +65,20 @@ button:focus-visible {
   margin-top: 4%;
   margin-bottom: 1%;
   display: grid;
-  grid-template: 50% 50% / 30% 70%;
-  background-color: tomato;
+  grid-template: 50% 50% / 30% 69%;
+
   height: 100vh;
   width: 100%;
+  gap: 10px;
+  row-gap: 0;
+  box-sizing: border-box; /* Add this line */
 }
 .container-about-grid {
   margin-top: 4%;
   margin-bottom: 1%;
   display: grid;
   grid-template: 40% 60% / 30% 70%;
-  background-color: tomato;
+
   height: 100vh;
   width: 100%;
   /* gap: 13px; */
@@ -86,18 +90,22 @@ button:focus-visible {
 }
 
 .topic-popular-artists-grid-item {
-  background-color: #213547;
+  background-color: rgb(0, 0, 0);
 }
 .topic-popular-artists-grid-item h2 {
   padding-left: 1%;
-  background-color: #213547;
+  background-color: rgb(0, 0, 0);
 }
 
 .card-artist-grid-item {
-  background-color: #535bf2;
+  background: linear-gradient(to bottom right, #373737, #000000);
 }
+.card-album-grid-item {
+  background-color: rgb(30, 30, 30);
+}
+
 .your-library-grid-item {
-  background-color: aqua;
+  background-color: rgb(30, 30, 30);
   grid-row: 1 / span 2;
 }
 

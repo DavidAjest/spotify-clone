@@ -6,7 +6,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function CardActionArtist({ artist }) {
+export default function CardActionAlbum({ artist }) {
   return (
     <Card
       sx={{
@@ -14,14 +14,11 @@ export default function CardActionArtist({ artist }) {
         minWidth: "150px",
         m: 2,
         backgroundColor: "transparent",
-        color: "white",
       }}
     >
       <CardActionArea component={Link} to={`/api/artists/${artist._id}`}>
         <CardMedia
           style={{
-            borderRadius: "50%", // Makes the image round
-
             objectFit: "cover",
 
             // Ensures the image covers the area without distortion
@@ -34,7 +31,10 @@ export default function CardActionArtist({ artist }) {
         />
         <CardContent>
           <Box sx={{ width: "100%", maxWidth: 500 }}>
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", color: "white" }}
+            >
               {artist.name}
             </Typography>
             <Typography variant="h7" sx={{ color: "grey" }}>

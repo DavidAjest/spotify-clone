@@ -6,100 +6,227 @@ import Typography from "@mui/material/Typography";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import ReactPlayer from "react-player";
-import { useState, useRef, useEffect } from "react"; // Importing React hooks
-import BottomMediaControl from "./BottomMediaControl";
+import { useContext, useRef, useState, useEffect } from "react"; // Importing React hooks
 
-import { SongsContext } from "../context/SongContext"; // Import the SongsContext
+import { NewSongsContext } from "../context/newSongContext";
+import { useLocation, useParams } from "react-router-dom";
+export default function MediaControlCard() {
+  const location = useLocation();
+  const [prevLocation, setPrevLocation] = useState(location.pathname);
 
-export default function MediaControlCard({ song }) {
-  const [isPlaying, setIsPlaying] = useState(false); // State to track if the audio is playing
-  const [duration, setDuration] = useState(0); // State to track the duration of the audio
-  const [seconds, setSeconds] = useState(0); // State to track the current position of the audio in seconds
-  const playerRef = useRef(null); // Ref to access the player instance
-
-  const playingButton = () => {
-    setIsPlaying(!isPlaying); // Toggle the isPlaying state
-  }; // Function to handle play and pause button click
+  const { id } = useParams();
+  const {
+    currentSong,
+    isPlaying,
+    songs,
+    playerRefs,
+    playingButton,
+    newSongDispatch,
+  } = useContext(NewSongsContext);
+  const artistSongs = songs.filter((song) => song.artists.includes(id));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (playerRef.current) {
-        setSeconds(playerRef.current.getCurrentTime()); // Set the seconds state with the current position of the audio
+    async function getartistSongsByArtist() {
+      if (artistSongs.length < 1) {
+        const response = await fetch(`http://localhost:5000/api/artists/${id}`);
+        const json = await response.json();
+        newSongDispatch({ type: "SET_SONGS", payload: json[0].songs });
       }
-    }, 1000); // Run this effect every second
-    return () => clearInterval(interval); // Clear the interval when the component unmounts
-  }, []);
+    }
+    getartistSongsByArtist();
+  }, [id, newSongDispatch, artistSongs.length]); // Add id and artists to the dependency array
+
+  useEffect(() => {
+    if (isPlaying) {
+      const interval = setInterval(() => {
+        const player = playerRefs.current.get(currentSong);
+        if (player) {
+          console.log(player.getCurrentTime());
+          newSongDispatch({
+            type: "SAVE_CURRENT_TIME",
+            payload: {
+              songId: currentSong,
+              currentSongTime: player.getCurrentTime(),
+            },
+          });
+        }
+      }, 1000); // Log every second
+
+      return () => clearInterval(interval); // Cleanup interval on component unmount or when isPlaying changes
+    }
+  }, [isPlaying, currentSong, playerRefs, newSongDispatch]);
+
+  if (!artistSongs) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <Card sx={{ margin: "1%", display: "flex" }}>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <IconButton aria-label="play/pause" onClick={playingButton}>
-          {!isPlaying ? (
-            <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
-          ) : (
-            <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
-          )}
-        </IconButton>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          padding: "0.5%",
-          alignItems: "center",
-        }}
-      >
-        <CardMedia
-          component="img"
-          sx={{ width: 45, height: 45 }}
-          image={song.image}
-          alt="Live from space album cover"
-        />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          paddingLeft: "1%",
-          alignItems: "center",
-        }}
-        component="div"
-      >
-        <Typography component="h5" variant="h5">
-          {song.title}
-        </Typography>
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
-        <div className="time">
-          <p>
-            {Math.floor(seconds / 60)}:{Math.floor(seconds % 60)}{" "}
-            {/* Display the current time */}
-          </p>
-          <p>
-            {Math.floor(duration / 60)}:{Math.floor(duration % 60)}{" "}
-            {/* Display the total duration */}
-          </p>
-        </div>
-        <input
-          type="range"
-          min="0"
-          max={duration}
-          value={seconds}
-          className="timeline"
-          onChange={(e) => {
-            playerRef.current.seekTo(parseFloat(e.target.value)); // Seek to the selected position in the audio
-          }}
-        />
-      </Box>
-      <Box>
-        <BottomMediaControl song={song} />
-      </Box>
-      <ReactPlayer
-        ref={playerRef}
-        url={song.urlOfSong}
-        playing={isPlaying}
-        width="0"
-        height="0"
-        onDuration={(duration) => setDuration(duration)} // Set the duration of the audio
-      />
-    </Card>
+    <Box sx={{ margin: "1%", display: "flex", flexDirection: "column" }}>
+      {artistSongs.map((song) => (
+        <Card key={song._id} sx={{ marginBottom: "1%", display: "flex" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <IconButton
+              onClick={() =>
+                playingButton(
+                  isPlaying,
+                  playerRefs.current.get(song._id),
+                  currentSong,
+                  song._id
+                )
+              }
+              aria-label="play/pause"
+            >
+              {currentSong === song._id && isPlaying ? (
+                <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
+              ) : (
+                <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
+              )}
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              padding: "0.5%",
+              alignItems: "center",
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{ width: 45, height: 45 }}
+              image={song.image}
+              alt="Live from space album cover"
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              paddingLeft: "1%",
+              alignItems: "center",
+            }}
+            component="div"
+          >
+            <Typography component="h5" variant="h5">
+              {song.title}
+            </Typography>
+
+            <ReactPlayer
+              ref={(player) => {
+                if (player && !playerRefs.current.has(song._id)) {
+                  playerRefs.current.set(song._id, player);
+                  newSongDispatch({
+                    type: "SET_REFS",
+                    payload: playerRefs.current,
+                  });
+                }
+              }} // Store the player instance in the Map with the song ID as the key
+              url={song.urlOfSong}
+              playing={currentSong === song._id && isPlaying}
+              width="0"
+              height="0"
+              config={{
+                youtube: {
+                  playerVars: { origin: window.location.origin },
+                },
+              }}
+            />
+          </Box>
+        </Card>
+      ))}
+    </Box>
   );
 }
+// BEFORE --> new song context
+
+// import Box from "@mui/material/Box";
+// import Card from "@mui/material/Card";
+// import CardMedia from "@mui/material/CardMedia";
+// import IconButton from "@mui/material/IconButton";
+// import Typography from "@mui/material/Typography";
+// import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+// import PauseIcon from "@mui/icons-material/Pause";
+// import ReactPlayer from "react-player";
+// import { useContext, useRef, useEffect } from "react"; // Importing React hooks
+// import { SongsContext } from "../context/SongContext";
+// import BottomMediaControl from "./BottomMediaControl";
+
+// export default function MediaControlCard({ song }) {
+//   const { currentSong, isPlaying, songDispatch } = useContext(SongsContext);
+//   const playerRefs = useRef(new Map()); // Create a Map to store player instances
+//   console.log("this is the player Refs", playerRefs);
+
+//   // Function to handle play and pause button click
+//   const playingButton = () => {
+//     if (currentSong === song._id && playerRefs.current.get(song._id)) {
+//       // If the current song is the same as this song and the player exists, toggle play/pause
+//       songDispatch({ type: isPlaying ? "PAUSE_SONG" : "PLAY_SONG" });
+//     } else {
+//       // If it's a different song, set this song as the current song and play it
+//       songDispatch({ type: "SET_SONG", payload: song._id });
+//       songDispatch({ type: "PLAY_SONG" });
+//     }
+//   };
+
+//   // Effect to reset the player to the beginning if it's not the current song
+//   useEffect(() => {
+//     if (currentSong !== song._id && playerRefs.current.get(song._id)) {
+//       playerRefs.current.get(song._id).seekTo(0); // Reset the player to the beginning
+//     }
+//   }, [currentSong, song._id]);
+
+//   return (
+//     <Card sx={{ margin: "1%", display: "flex" }}>
+//       <Box sx={{ display: "flex", flexDirection: "column" }}>
+//         <IconButton aria-label="play/pause" onClick={playingButton}>
+//           {currentSong === song._id && isPlaying ? (
+//             <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
+//           ) : (
+//             <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
+//           )}
+//         </IconButton>
+//       </Box>
+//       <Box
+//         sx={{
+//           display: "flex",
+//           padding: "0.5%",
+//           alignItems: "center",
+//         }}
+//       >
+//         <CardMedia
+//           component="img"
+//           sx={{ width: 45, height: 45 }}
+//           image={song.image}
+//           alt="Live from space album cover"
+//         />
+//       </Box>
+//       <Box
+//         sx={{
+//           display: "flex",
+//           paddingLeft: "1%",
+//           alignItems: "center",
+//         }}
+//         component="div"
+//       >
+//         <Typography component="h5" variant="h5">
+//           {song.title}
+//         </Typography>
+//       </Box>
+
+//       <ReactPlayer
+//         ref={(player) => playerRefs.current.set(song._id, player)} // Store the player instance in the Map with the song ID as the key
+//         url={song.urlOfSong}
+//         playing={currentSong === song._id && isPlaying}
+//         width="0"
+//         height="0"
+//       />
+//       <BottomMediaControl
+//         song={song}
+//         playingButton={playingButton}
+//         isPlaying={isPlaying}
+//         currentSong={currentSong}
+//         playerRef={playerRefs.current.get(song._id)} // Get the player instance from the Map using the song ID
+//         duration={playerRefs.current.get(song._id)?.getDuration() || 0}
+//         seconds={playerRefs.current.get(song._id)?.getCurrentTime() || 0}
+//       />
+//     </Card>
+//   );
+// }

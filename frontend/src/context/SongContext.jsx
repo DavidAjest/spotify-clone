@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer, useContext, useState } from "react";
 
 // Create a new context for songs
 export const SongsContext = createContext();
@@ -19,34 +19,16 @@ export const songReducer = (state, action) => {
 
 // Create a provider component for the song context
 export const SongContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(songReducer, {
+  const [state, songDispatch] = useReducer(songReducer, {
     currentSong: null,
     isPlaying: false,
   });
-
-  const [played, setPlayed] = useState(0);
-  const [loaded, setLoaded] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  const handleProgress = ({ played, loaded }) => {
-    setPlayed(played);
-    setLoaded(loaded);
-  };
-
-  const handleDuration = (duration) => {
-    setDuration(duration);
-  };
 
   return (
     <SongsContext.Provider
       value={{
         ...state,
-        dispatch,
-        played,
-        loaded,
-        duration,
-        handleProgress,
-        handleDuration,
+        songDispatch,
       }}
     >
       {children}

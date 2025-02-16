@@ -1,18 +1,26 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import CardMedia from "@mui/material/CardMedia";
 
-import { ArtistsContext } from "../context/ArtistContext";
-import { useContext } from "react";
+export default function BottomMediaControl({
+  song,
+  playingButton,
+  isPlaying,
+  playerRef,
+  duration,
+  seconds,
+}) {
+  console.log("this is the songYYYYYY", song);
 
-export default function BottomMediaControl({ song }) {
-  const { artists, dispatch } = useContext(ArtistsContext);
   const [value, setValue] = React.useState(0);
   const ref = React.useRef(null);
 
@@ -29,9 +37,27 @@ export default function BottomMediaControl({ song }) {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <img src={song.image} alt="" />
+            <IconButton aria-label="play/pause" onClick={playingButton}>
+              {!isPlaying ? (
+                <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
+              ) : (
+                <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
+              )}
+            </IconButton>
+
+            <input
+              type="range"
+              min="0"
+              max={duration}
+              value={seconds}
+              className="timeline"
+              onChange={(e) => {
+                playerRef.seekTo(parseFloat(e.target.value)); // Seek to the selected position in the audio
+              }}
+            />
+          </Box>
         </BottomNavigation>
       </Paper>
     </Box>

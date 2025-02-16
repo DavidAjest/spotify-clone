@@ -1,20 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+// import { CssBaseline } from "@mui/material";
 import App from "./App.jsx";
-import { ArtistContextProvider } from "./context/ArtistContext";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import Login from "./components/Login.jsx";
-import { SongContextProvider } from "./context/SongContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ArtistContextProvider>
-      <SongContextProvider>
-        {/* <CssBaseline /> */}
-        <App />
-      </SongContextProvider>
-    </ArtistContextProvider>
+    {/* <CssBaseline /> */}
+    <App />
   </StrictMode>
 );
 

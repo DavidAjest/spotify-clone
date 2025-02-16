@@ -3,13 +3,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //pages
 import Home from "./pages/Home";
 import AboutArtist from "./pages/AboutArtist";
-
+import { ArtistContextProvider } from "./context/ArtistContext";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import Login from "./components/Login.jsx";
+import { SongContextProvider } from "./context/SongContext.jsx";
 // Compoenets
 import Navbar from "./components/Navbar";
-
+import NewBottomMediaControl from "./components/newBottomMediaControl";
 import "./App.css";
+import { NewSongContextProvider } from "./context/newSongContext.jsx";
+// import BottomMediaControl from "./components/BottomMediaControl.jsx";
 // import PlayerDEV from "./components/PlayerDEV";
-import BottomMediaControl from "./components/BottomMediaControl";
+
 // import Login from "./components/Login";
 // import Dashboard from "./components/Dashboard";
 
@@ -19,19 +24,23 @@ function App() {
   // return code ? <Dashboard code={code} /> : <Login />;
   return (
     <div className="App">
-      {/* <CssBaseline /> for some reasong the CssBaseLine comp, makes the play/puase icons smaller */}
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            {" "}
-            <Route path="/home" element={<Home />} />
-            <Route path="/api/artists/:id" element={<AboutArtist />} />
-            {/* <PlayerDEV /> */}
-          </Routes>
-        </div>
-      </BrowserRouter>
-      <BottomMediaControl />
+      <ArtistContextProvider>
+        <SongContextProvider>
+          <NewSongContextProvider>
+            <BrowserRouter>
+              <Navbar />
+              <div className="pages">
+                <Routes>
+                  {" "}
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/api/artists/:id" element={<AboutArtist />} />
+                </Routes>
+              </div>
+              <NewBottomMediaControl />
+            </BrowserRouter>
+          </NewSongContextProvider>
+        </SongContextProvider>
+      </ArtistContextProvider>
     </div>
   );
 }
