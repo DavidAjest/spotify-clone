@@ -1,20 +1,9 @@
 import * as React from "react";
+
 import Box from "@mui/material/Box";
 import { useContext } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ArchiveIcon from "@mui/icons-material/Archive";
 import Paper from "@mui/material/Paper";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-// MEDIA CONTROL IMPORTS DOWN BELOW
-import { useTheme } from "@mui/material/styles";
+import ReactPlayer from "react-player";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -35,15 +24,14 @@ export default function NewBottomMediaControl() {
     playerRefs,
     playingButton,
     newSongDispatch,
-    currentTime,
   } = useContext(NewSongsContext);
-  console.log("this is the bottom media control:", currentTime);
+
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
 
-  const ref = React.useRef(null);
+  // const ref = React.useRef(null);
 
   return (
-    <Box sx={{ pb: 7 }} ref={ref}>
+    <Box sx={{ pb: 7 }}>
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "10%" }}
         elevation={3}
@@ -125,6 +113,28 @@ export default function NewBottomMediaControl() {
             <VolumeUpIcon />
           </Box>
         </Card>
+        {bottomCurrentSong && (
+          <ReactPlayer
+            ref={(player) => {
+              if (player && !playerRefs.current.has(currentSong)) {
+                playerRefs.current.set(currentSong, player);
+                newSongDispatch({
+                  type: "SET_REFS",
+                  payload: playerRefs.current,
+                });
+              }
+            }} // Store the player instance in the Map with the song ID as the key
+            url={bottomCurrentSong.urlOfSong}
+            playing={currentSong === bottomCurrentSong._id && isPlaying}
+            width="0"
+            height="0"
+            config={{
+              youtube: {
+                playerVars: { origin: window.location.origin },
+              },
+            }}
+          />
+        )}
       </Paper>
     </Box>
   );

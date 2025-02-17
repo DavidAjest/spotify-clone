@@ -17,6 +17,7 @@ export const songReducer = (state, action) => {
       return { ...state, isPlaying: true };
     case "PAUSE_SONG":
       return { ...state, isPlaying: false };
+
     case "SAVE_CURRENT_TIME":
       return { ...state, currentTime: action.payload };
     default:
@@ -37,8 +38,8 @@ export const NewSongContextProvider = ({ children }) => {
 
   const playingButton = (isPlaying, playerRef, currentSong, song_id) => {
     if (currentSong === song_id && playerRef) {
-      console.log("this is current song", currentSong);
       // If the current song is the same as this song and the player exists, toggle play/pause
+
       newSongDispatch({ type: isPlaying ? "PAUSE_SONG" : "PLAY_SONG" });
     } else {
       // If it's a different song, set this song as the current song and play it

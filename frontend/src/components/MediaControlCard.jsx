@@ -22,6 +22,8 @@ export default function MediaControlCard() {
     playerRefs,
     playingButton,
     newSongDispatch,
+    currentTime,
+    isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
   const artistSongs = songs.filter((song) => song.artists.includes(id));
 
@@ -35,26 +37,6 @@ export default function MediaControlCard() {
     }
     getartistSongsByArtist();
   }, [id, newSongDispatch, artistSongs.length]); // Add id and artists to the dependency array
-
-  useEffect(() => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        const player = playerRefs.current.get(currentSong);
-        if (player) {
-          console.log(player.getCurrentTime());
-          newSongDispatch({
-            type: "SAVE_CURRENT_TIME",
-            payload: {
-              songId: currentSong,
-              currentSongTime: player.getCurrentTime(),
-            },
-          });
-        }
-      }, 1000); // Log every second
-
-      return () => clearInterval(interval); // Cleanup interval on component unmount or when isPlaying changes
-    }
-  }, [isPlaying, currentSong, playerRefs, newSongDispatch]);
 
   if (!artistSongs) {
     return <div>Loading...</div>;
@@ -71,7 +53,8 @@ export default function MediaControlCard() {
                   isPlaying,
                   playerRefs.current.get(song._id),
                   currentSong,
-                  song._id
+                  song._id,
+                  isPlayingBottomPlayer
                 )
               }
               aria-label="play/pause"
@@ -120,7 +103,7 @@ export default function MediaControlCard() {
                 }
               }} // Store the player instance in the Map with the song ID as the key
               url={song.urlOfSong}
-              playing={currentSong === song._id && isPlaying}
+              // playing={currentSong === song._id && isPlaying}
               width="0"
               height="0"
               config={{
