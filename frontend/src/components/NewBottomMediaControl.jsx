@@ -1,7 +1,7 @@
-import * as React from "react";
+// import * as React from "react";
 
 import Box from "@mui/material/Box";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Paper from "@mui/material/Paper";
 import ReactPlayer from "react-player";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -24,11 +24,84 @@ export default function NewBottomMediaControl() {
     playerRefs,
     playingButton,
     newSongDispatch,
+    artist,
   } = useContext(NewSongsContext);
 
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
+  console.log("this is bottomCurrentSong", bottomCurrentSong);
+  const [currentTime, setCurrentTime] = useState(0); // State to store the current time
+  const [duration, setDuration] = useState(0); // State to store the duration
 
-  // const ref = React.useRef(null);
+  useEffect(() => {
+    const fetchArtists = async () => {
+      const response = await fetch("http://localhost:5000/api/artists");
+      const json = await response.json();
+      if (response.ok) {
+        let bottomCurrentArtist = json.find((artist) =>
+          artist.songs.some((song) => song._id === currentSong)
+        );
+        newSongDispatch({ type: "SET_ARTIST", payload: bottomCurrentArtist });
+      } else {
+        console.log(response.status);
+      }
+    };
+    fetchArtists();
+  }, [newSongDispatch, currentSong, isPlaying]);
+
+  useEffect(() => {
+    const updateCurrentTime = () => {
+      const player = playerRefs.current.get(currentSong);
+      if (player && isPlaying) {
+        // Check if the song is playing
+        const time = player.getCurrentTime();
+        setCurrentTime(time);
+      }
+    };
+    const myInterval = setInterval(updateCurrentTime, 1000);
+    return () => {
+      clearInterval(myInterval); // Clear the interval when the component is unmounted or dependencies change
+    };
+  }, [currentSong, playerRefs, isPlaying]);
+
+  const handleNextSong = () => {
+    console.log("this is the songs", songs);
+
+    const currentIndexSongPlaying = songs.findIndex(
+      (song) => song._id === currentSong
+    );
+
+    // Check if the current song is the last one in the list
+    if (currentIndexSongPlaying === songs.length - 1) {
+      console.log("This is the last song in the list");
+      return;
+    }
+
+    const nextSong = songs[currentIndexSongPlaying + 1];
+    console.log(nextSong);
+    newSongDispatch({ type: "SET_SONG", payload: nextSong._id }); // YYYYYYYYYYYYYYYYYYYYYYY
+    newSongDispatch({ type: "PLAY_SONG" }); // YYYYYYYYYYYYYYYYYYYYYYY
+    console.log("this is the INDEX of current song", currentIndexSongPlaying);
+  };
+
+  const handlePreviousSong = () => {
+    console.log("this is the songs", songs);
+
+    const currentIndexSongPlaying = songs.findIndex(
+      (song) => song._id === currentSong
+    );
+
+    // Check if the current song is the first one in the list
+    if (currentIndexSongPlaying === 0) {
+      console.log("This is the first song in the list");
+      return;
+    }
+
+    const previousSong = songs[currentIndexSongPlaying - 1];
+    console.log(previousSong);
+    newSongDispatch({ type: "SET_SONG", payload: previousSong._id }); // YYYYYYYYYYYYYYYYYYYYYYY
+    newSongDispatch({ type: "PLAY_SONG" }); // YYYYYYYYYYYYYYYYYYYYYYY
+    console.log("this is the INDEX of current song", currentIndexSongPlaying);
+  };
 
   return (
     <Box sx={{ pb: 7 }}>
@@ -54,52 +127,82 @@ export default function NewBottomMediaControl() {
             <CardMedia
               component="img"
               sx={{ width: 70, padding: 1, height: 70 }}
-              image="https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd"
+              image={bottomCurrentSong && bottomCurrentSong.image}
               alt="Live from space album cover"
             />
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h7">
-                Live From Space
+                {bottomCurrentSong && bottomCurrentSong.title}
               </Typography>
               <Typography
                 variant="subtitle1"
                 component="div"
                 sx={{ color: "text.secondary" }}
               >
-                Mac Miller
+                {artist && artist.name}
               </Typography>
             </CardContent>
           </Box>
           <Box
             sx={{
               display: "flex",
+              flexDirection: "column",
+              width: "40%",
             }}
           >
-            <IconButton aria-label="previous">
-              <SkipPreviousIcon />
-            </IconButton>
+            <div>
+              <IconButton
+                onClick={() => handlePreviousSong()}
+                aria-label="previous"
+              >
+                <SkipPreviousIcon />
+              </IconButton>
 
-            <IconButton
-              onClick={() =>
-                playingButton(
-                  isPlaying,
-                  playerRefs.current.get(currentSong),
-                  currentSong,
-                  currentSong
-                )
-              }
-              aria-label="play/pause"
-            >
-              {currentSong && isPlaying ? (
-                <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
-              ) : (
-                <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
-              )}
-            </IconButton>
+              <IconButton
+                onClick={() =>
+                  playingButton(
+                    isPlaying,
+                    playerRefs.current.get(currentSong),
+                    currentSong,
+                    currentSong
+                  )
+                }
+                aria-label="play/pause"
+              >
+                {currentSong && isPlaying ? (
+                  <PauseIcon sx={{ padding: 1, height: 20, width: 20 }} />
+                ) : (
+                  <PlayArrowIcon sx={{ padding: 1, height: 20, width: 20 }} />
+                )}
+              </IconButton>
 
-            <IconButton aria-label="next">
-              <SkipNextIcon />
-            </IconButton>
+              <IconButton onClick={() => handleNextSong()} aria-label="next">
+                <SkipNextIcon />
+              </IconButton>
+            </div>
+            <div style={{ display: "flex" }}>
+              <div>
+                {`${Math.floor(currentTime / 60)}:${
+                  Math.floor(currentTime % 60) < 10 ? "0" : ""
+                }${Math.floor(currentTime % 60)}`}
+              </div>
+              <input
+                style={{ width: "100%" }}
+                type="range"
+                min={0}
+                max={duration}
+                value={currentTime}
+                onChange={(e) => {
+                  const player = playerRefs.current.get(currentSong);
+                  setCurrentTime(e.target.value);
+                  player.seekTo(e.target.value);
+                }} // YYYYYYYYYYY
+              />
+              <div>
+                {bottomCurrentSong &&
+                  `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`}
+              </div>
+            </div>
           </Box>
           <Box
             sx={{
@@ -113,26 +216,37 @@ export default function NewBottomMediaControl() {
             <VolumeUpIcon />
           </Box>
         </Card>
+
         {bottomCurrentSong && (
           <ReactPlayer
             ref={(player) => {
-              if (player && !playerRefs.current.has(currentSong)) {
-                playerRefs.current.set(currentSong, player);
-                newSongDispatch({
-                  type: "SET_REFS",
-                  payload: playerRefs.current,
-                });
+              if (playerRefs) {
+                // YYYYYYYYYYY
+                // console.log("Current Time:", player.getCurrentTime());
+
+                // ++++++++++++++++++++++++++
+                // console.log("playerRefs:", playerRefs);
+                // player = playerRefs.current.has(currentSong);
+                if (!playerRefs.current.has(currentSong)) {
+                  playerRefs.current.set(currentSong, player);
+                  newSongDispatch({
+                    type: "SET_REFS",
+                    payload: playerRefs.current,
+                  });
+                }
               }
             }} // Store the player instance in the Map with the song ID as the key
             url={bottomCurrentSong.urlOfSong}
             playing={currentSong === bottomCurrentSong._id && isPlaying}
             width="0"
             height="0"
+            onDuration={(duration) => setDuration(duration)} // YYYYYYYYYYY Set the duration when the player is ready
             config={{
               youtube: {
                 playerVars: { origin: window.location.origin },
               },
             }}
+            // onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
           />
         )}
       </Paper>

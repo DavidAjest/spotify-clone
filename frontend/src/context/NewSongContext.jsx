@@ -17,9 +17,11 @@ export const songReducer = (state, action) => {
       return { ...state, isPlaying: true };
     case "PAUSE_SONG":
       return { ...state, isPlaying: false };
-
     case "SAVE_CURRENT_TIME":
       return { ...state, currentTime: action.payload };
+    case "SET_ARTIST":
+      return { ...state, artist: action.payload };
+
     default:
       return state;
   }
@@ -32,7 +34,7 @@ export const NewSongContextProvider = ({ children }) => {
     isPlaying: false,
     playerRefs: useRef(new Map()),
     currentTime: {},
-
+    artist: null,
     songs: [],
   });
 
@@ -44,6 +46,7 @@ export const NewSongContextProvider = ({ children }) => {
     } else {
       // If it's a different song, set this song as the current song and play it
       newSongDispatch({ type: "SET_SONG", payload: song_id });
+
       newSongDispatch({ type: "PLAY_SONG" });
     }
   };

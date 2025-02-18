@@ -10,6 +10,36 @@
     "artists": ["Ed Sheeran"]
   },
   {
+    "title": "Shape of you",
+    "album": "=",
+    "genre": "pop",
+    "duration": 207,
+    "releaseDate": "2021-09-10",
+    "image": "https://linkstorage.linkfire.com/medialinks/images/2fdecdb2-6d41-4643-96cc-788849c33527/artwork-440x220.jpg",
+    "urlOfSong": "https://www.youtube.com/watch?v=liTfD88dbCo",
+    "artists": ["Ed Sheeran"]
+  },
+  {
+    "title": "Perfect",
+    "album": "=",
+    "genre": "pop",
+    "duration": 207,
+    "releaseDate": "2021-09-10",
+    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "urlOfSong": "https://www.youtube.com/watch?v=kPhpHvnnn0Q",
+    "artists": ["Ed Sheeran"]
+  },
+  {
+    "title": "Barcelona",
+    "album": "=",
+    "genre": "pop",
+    "duration": 207,
+    "releaseDate": "2021-09-10",
+    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "urlOfSong": "https://www.youtube.com/watch?v=IyaQfwMoYVA",
+    "artists": ["Ed Sheeran"]
+  },
+  {
     "title": "Locked Out of Heaven",
     "album": "Unorthodox Jukebox",
     "genre": "pop",
@@ -17,6 +47,26 @@
     "releaseDate": "2012-10-01",
     "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
     "urlOfSong": "https://www.youtube.com/watch?v=OK_b2-w0u60",
+    "artists": ["Bruno Mars"]
+  },
+  {
+    "title": "Granade",
+    "album": "Unorthodox Jukebox",
+    "genre": "pop",
+    "duration": 233,
+    "releaseDate": "2012-10-01",
+    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "urlOfSong": "https://www.youtube.com/watch?v=4YrzJ9RZ9qY",
+    "artists": ["Bruno Mars"]
+  },
+  {
+    "title": "The Lazy Song",
+    "album": "Unorthodox Jukebox",
+    "genre": "pop",
+    "duration": 233,
+    "releaseDate": "2012-10-01",
+    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "urlOfSong": "https://www.youtube.com/watch?v=GYW87vbSxjg",
     "artists": ["Bruno Mars"]
   },
   {

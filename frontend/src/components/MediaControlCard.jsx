@@ -6,14 +6,11 @@ import Typography from "@mui/material/Typography";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import ReactPlayer from "react-player";
-import { useContext, useRef, useState, useEffect } from "react"; // Importing React hooks
+import { useContext, useEffect } from "react"; // Importing React hooks
 
 import { NewSongsContext } from "../context/newSongContext";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 export default function MediaControlCard() {
-  const location = useLocation();
-  const [prevLocation, setPrevLocation] = useState(location.pathname);
-
   const { id } = useParams();
   const {
     currentSong,
@@ -22,7 +19,8 @@ export default function MediaControlCard() {
     playerRefs,
     playingButton,
     newSongDispatch,
-    currentTime,
+    artist,
+
     isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
   const artistSongs = songs.filter((song) => song.artists.includes(id));
@@ -32,11 +30,12 @@ export default function MediaControlCard() {
       if (artistSongs.length < 1) {
         const response = await fetch(`http://localhost:5000/api/artists/${id}`);
         const json = await response.json();
+
         newSongDispatch({ type: "SET_SONGS", payload: json[0].songs });
       }
     }
     getartistSongsByArtist();
-  }, [id, newSongDispatch, artistSongs.length]); // Add id and artists to the dependency array
+  }, [artist, id, newSongDispatch, artistSongs.length, isPlaying, currentSong]); // Add id and artists to the dependency array
 
   if (!artistSongs) {
     return <div>Loading...</div>;
@@ -92,7 +91,7 @@ export default function MediaControlCard() {
               {song.title}
             </Typography>
 
-            <ReactPlayer
+            {/* <ReactPlayer
               ref={(player) => {
                 if (player && !playerRefs.current.has(song._id)) {
                   playerRefs.current.set(song._id, player);
@@ -111,7 +110,7 @@ export default function MediaControlCard() {
                   playerVars: { origin: window.location.origin },
                 },
               }}
-            />
+            /> */}
           </Box>
         </Card>
       ))}
