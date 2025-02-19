@@ -28,7 +28,7 @@ export default function NewBottomMediaControl() {
   } = useContext(NewSongsContext);
 
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
-  console.log("this is bottomCurrentSong", bottomCurrentSong);
+
   const [currentTime, setCurrentTime] = useState(0); // State to store the current time
   const [duration, setDuration] = useState(0); // State to store the duration
 
@@ -64,8 +64,6 @@ export default function NewBottomMediaControl() {
   }, [currentSong, playerRefs, isPlaying]);
 
   const handleNextSong = () => {
-    console.log("this is the songs", songs);
-
     const currentIndexSongPlaying = songs.findIndex(
       (song) => song._id === currentSong
     );
@@ -77,15 +75,12 @@ export default function NewBottomMediaControl() {
     }
 
     const nextSong = songs[currentIndexSongPlaying + 1];
-    console.log(nextSong);
+
     newSongDispatch({ type: "SET_SONG", payload: nextSong._id }); // YYYYYYYYYYYYYYYYYYYYYYY
     newSongDispatch({ type: "PLAY_SONG" }); // YYYYYYYYYYYYYYYYYYYYYYY
-    console.log("this is the INDEX of current song", currentIndexSongPlaying);
   };
 
   const handlePreviousSong = () => {
-    console.log("this is the songs", songs);
-
     const currentIndexSongPlaying = songs.findIndex(
       (song) => song._id === currentSong
     );
@@ -97,16 +92,21 @@ export default function NewBottomMediaControl() {
     }
 
     const previousSong = songs[currentIndexSongPlaying - 1];
-    console.log(previousSong);
+
     newSongDispatch({ type: "SET_SONG", payload: previousSong._id }); // YYYYYYYYYYYYYYYYYYYYYYY
     newSongDispatch({ type: "PLAY_SONG" }); // YYYYYYYYYYYYYYYYYYYYYYY
-    console.log("this is the INDEX of current song", currentIndexSongPlaying);
   };
 
   return (
     <Box sx={{ pb: 7 }}>
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "10%" }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "10%",
+        }}
         elevation={3}
       >
         <Card
@@ -124,12 +124,17 @@ export default function NewBottomMediaControl() {
               alignItems: "center",
             }}
           >
-            <CardMedia
-              component="img"
-              sx={{ width: 70, padding: 1, height: 70 }}
-              image={bottomCurrentSong && bottomCurrentSong.image}
-              alt="Live from space album cover"
-            />
+            {bottomCurrentSong ? (
+              <CardMedia
+                component="img"
+                sx={{ width: 70, padding: 1, height: 70 }}
+                image={bottomCurrentSong && bottomCurrentSong.image}
+                alt="PLEASE CHOOSE A SONG FIRST"
+              />
+            ) : (
+              <h6 style={{ padding: "5px" }}>CHOOSE A SONG FIRST</h6>
+            )}
+
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography component="div" variant="h7">
                 {bottomCurrentSong && bottomCurrentSong.title}

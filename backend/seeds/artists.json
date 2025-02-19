@@ -2,7 +2,7 @@
   {
     "name": "Bruno Mars",
     "type": "artist",
-    "albums": [],
+    "albums": ["Unorthodox Jukebox"],
     "image": "https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911f25dd",
     "songs": [],
     "followers": 67269815,
@@ -13,7 +13,7 @@
   {
     "name": "Ed Sheeran",
     "type": "artist",
-    "albums": [],
+    "albums": ["=", ":"],
     "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
     "songs": [],
     "followers": 118902348,
@@ -24,7 +24,7 @@
   {
     "name": "Harry Styles",
     "type": "artist",
-    "albums": [],
+    "albums": ["Harry's House"],
     "image": "https://i.scdn.co/image/ab6761610000e5ebf7db7c8ede90a019c54590bb",
     "songs": [],
     "followers": 33437804,

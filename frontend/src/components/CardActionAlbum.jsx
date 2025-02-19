@@ -16,7 +16,8 @@ export default function CardActionAlbum({ artist }) {
         backgroundColor: "transparent",
       }}
     >
-      <CardActionArea component={Link} to={`/api/artists/${artist._id}`}>
+      <CardActionArea component={Link} to={`/api/artists/album/${artist._id}`}>
+        {console.log("this is from the Album card", artist)}
         <CardMedia
           style={{
             objectFit: "cover",
@@ -38,7 +39,7 @@ export default function CardActionAlbum({ artist }) {
               {artist.name}
             </Typography>
             <Typography variant="h7" sx={{ color: "grey" }}>
-              {artist.type}
+              {artist.albums[0] && artist.albums[0]}
             </Typography>
           </Box>
         </CardContent>

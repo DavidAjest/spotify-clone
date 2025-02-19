@@ -4,9 +4,10 @@ const router = express.Router();
 const {
   createArtist,
   showAllArtists,
-  deleteArtist,
+  // deleteArtist,
   showArtistById,
   updateArtist,
+  showArtistAlbumById,
 } = require("../controllers/artistController");
 
 // Retrieve a list of all artists. // Base Path "api/artists"
@@ -22,6 +23,9 @@ router.post("/", createArtist);
 router.patch("/:id", updateArtist);
 
 // Delete specific artist by ID // Base Path "api/artists/:id"
-router.delete("/:id", deleteArtist);
+// router.delete("/:id", deleteArtist);
+
+// show specific album
+// router.get("/album/:id", showArtistAlbumById);
 
 module.exports = router;

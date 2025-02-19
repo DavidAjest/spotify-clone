@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AboutArtist from "./pages/AboutArtist";
 import { ArtistContextProvider } from "./context/ArtistContext";
+import ArtistAlbum from "./pages/ArtistAlbum";
 // import CssBaseline from "@mui/material/CssBaseline";
 // import Login from "./components/Login.jsx";
 import { SongContextProvider } from "./context/SongContext.jsx";
@@ -34,6 +35,10 @@ function App() {
                   {" "}
                   <Route path="/home" element={<Home />} />
                   <Route path="/api/artists/:id" element={<AboutArtist />} />
+                  <Route
+                    path="/api/artists/album/:id"
+                    element={<ArtistAlbum />}
+                  />
                 </Routes>
               </div>
               <NewBottomMediaControl />

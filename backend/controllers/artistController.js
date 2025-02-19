@@ -30,15 +30,15 @@ const showAllArtists = async (req, res) => {
   }
 };
 
-const deleteArtist = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedArtist = await artistModel.deleteOne({ _id: id });
-    res.status(200).json(deletedArtist);
-  } catch (error) {
-    res.status(404).json(error);
-  }
-};
+// const deleteArtist = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const deletedArtist = await artistModel.deleteOne({ _id: id });
+//     res.status(200).json(deletedArtist);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// };
 
 const showArtistById = async (req, res) => {
   try {
@@ -49,6 +49,17 @@ const showArtistById = async (req, res) => {
     res.status(404).json(error);
   }
 };
+
+// const showArtistAlbumById = async (req, res) => {
+//   console.log("lolololololololollololo");
+//   try {
+//     const { id } = req.params;
+//     const artist = await artistModel.find({ _id: id }).populate("songs");
+//     res.status(200).json(artist);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// };
 
 const updateArtist = async (req, res) => {
   try {
@@ -64,12 +75,15 @@ const updateArtist = async (req, res) => {
   }
 };
 
+// const showAlbumsArtist
+
 // ADDING SONG TO ARTIST
 
 module.exports = {
   createArtist,
   showAllArtists,
-  deleteArtist,
+  // deleteArtist,
+  // showArtistAlbumById,
   showArtistById,
   updateArtist,
 };
