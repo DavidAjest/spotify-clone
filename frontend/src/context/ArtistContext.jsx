@@ -27,24 +27,3 @@ export const ArtistContextProvider = ({ children }) => {
     </ArtistsContext.Provider>
   );
 };
-
-//
-// export const ArtistContextProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(artistReducer, {
-//     artists: [
-//       {
-//         id: 1,
-//         artist: "Adele",
-//         song: "hello",
-//         imgURL:
-//           "https://hips.hearstapps.com/hmg-prod/images/ed-sheeran-GettyImages-494227430_1600.jpg",
-//       },
-//       {
-//         id: 2,
-//         artist: "Ed Sheeran",
-//         song: "Perfect",
-//         imgURL:
-//           "https://hips.hearstapps.com/hmg-prod/images/ed-sheeran-GettyImages-494227430_1600.jpg",
-//       },
-//     ],
-//   });

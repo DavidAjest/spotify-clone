@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "lodash": "^4.17.21"
+    "@mui/styles": "^6.4.5",
+    "lodash": "^4.17.21",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1"
   }
 }

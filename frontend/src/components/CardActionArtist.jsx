@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function CardActionArtist({ artist }) {
@@ -21,14 +21,14 @@ export default function CardActionArtist({ artist }) {
         <CardMedia
           style={{
             borderRadius: "50%", // Makes the image round
-
+            maxHeight: "100%",
+            maxWidth: "100%",
             objectFit: "cover",
 
             // Ensures the image covers the area without distortion
           }}
           className="img-artist-home"
           component="img"
-          height="200"
           image={artist.image}
           alt="green iguana"
         />

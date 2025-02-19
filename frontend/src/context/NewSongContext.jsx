@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import ReactPlayer from "react-player";
+
 import { useRef } from "react";
 // Create a new context for songs
 export const NewSongsContext = createContext();

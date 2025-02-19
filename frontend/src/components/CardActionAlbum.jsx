@@ -17,7 +17,6 @@ export default function CardActionAlbum({ artist }) {
       }}
     >
       <CardActionArea component={Link} to={`/api/artists/album/${artist._id}`}>
-        {console.log("this is from the Album card", artist)}
         <CardMedia
           style={{
             objectFit: "cover",
