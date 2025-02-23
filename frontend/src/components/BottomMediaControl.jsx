@@ -105,12 +105,14 @@ export default function BottomMediaControl() {
           bottom: 0,
           left: 0,
           right: 0,
-          height: "10%",
+
+          zIndex: 100,
         }}
         elevation={3}
       >
         <Card
           sx={{
+            backgroundColor: "black",
             width: "100%",
             display: "flex",
             alignItems: "center",
@@ -134,19 +136,27 @@ export default function BottomMediaControl() {
             ) : (
               <h6 style={{ padding: "5px" }}>CHOOSE A SONG FIRST</h6>
             )}
-
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography component="div" variant="h7">
-                {bottomCurrentSong && bottomCurrentSong.title}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{ color: "text.secondary" }}
-              >
-                {artist && artist.name}
-              </Typography>
-            </CardContent>
+            <Box>
+              <CardContent sx={{ flex: "1 0 auto", color: "white" }}>
+                <Typography variant="subtitle1" component="div">
+                  {bottomCurrentSong && artist && artist.name}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "gray",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: 120,
+                    height: 30,
+                  }}
+                  component="div"
+                  variant="h7"
+                >
+                  {bottomCurrentSong && bottomCurrentSong.title}
+                </Typography>
+              </CardContent>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -157,6 +167,12 @@ export default function BottomMediaControl() {
           >
             <div>
               <IconButton
+                sx={{
+                  color: "gray",
+                  "&:hover": {
+                    color: "white",
+                  },
+                }}
                 onClick={() => handlePreviousSong()}
                 aria-label="previous"
               >
@@ -164,6 +180,7 @@ export default function BottomMediaControl() {
               </IconButton>
 
               <IconButton
+                sx={{ color: "white" }}
                 onClick={() =>
                   playingButton(
                     isPlaying,
@@ -181,7 +198,16 @@ export default function BottomMediaControl() {
                 )}
               </IconButton>
 
-              <IconButton onClick={() => handleNextSong()} aria-label="next">
+              <IconButton
+                sx={{
+                  color: "gray",
+                  "&:hover": {
+                    color: "white",
+                  },
+                }}
+                onClick={() => handleNextSong()}
+                aria-label="next"
+              >
                 <SkipNextIcon />
               </IconButton>
             </div>
@@ -218,7 +244,7 @@ export default function BottomMediaControl() {
               width: "10%",
             }}
           >
-            <VolumeUpIcon />
+            <VolumeUpIcon sx={{ color: "white" }} />
           </Box>
         </Card>
 

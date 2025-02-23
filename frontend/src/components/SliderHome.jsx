@@ -14,7 +14,7 @@ export default function SliderHome({ children }) {
       {
         breakpoint: 1600,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
         },
@@ -28,9 +28,9 @@ export default function SliderHome({ children }) {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 530,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 2,
           initialSlide: 2,
         },

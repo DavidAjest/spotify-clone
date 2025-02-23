@@ -10,15 +10,17 @@ import ArtistAlbum from "./pages/ArtistAlbum";
 import Navbar from "./components/Navbar";
 import BottomMediaControl from "./components/BottomMediaControl";
 import "./App.css";
-import { NewSongContextProvider } from "./context/NewSongContext.jsx";
+import { NewSongContextProvider } from "./context/newSongContext.jsx";
+import ResponsiveDrawer from "./components/ResponsiveDrawer.jsx";
 
 function App() {
   return (
     <div className="App">
-      <ArtistContextProvider>
-        <NewSongContextProvider>
-          <BrowserRouter>
-            <Navbar />
+      <BrowserRouter>
+        <ResponsiveDrawer />
+        <ArtistContextProvider>
+          <NewSongContextProvider>
+            {/* <Navbar /> */}
             <div className="pages">
               <Routes>
                 {" "}
@@ -31,9 +33,9 @@ function App() {
               </Routes>
             </div>
             <BottomMediaControl />
-          </BrowserRouter>
-        </NewSongContextProvider>
-      </ArtistContextProvider>
+          </NewSongContextProvider>
+        </ArtistContextProvider>
+      </BrowserRouter>
     </div>
   );
 }

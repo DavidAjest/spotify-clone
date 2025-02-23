@@ -27,7 +27,7 @@ body {
   display: flex;
   place-items: center;
 
-  min-width: 1200px;
+  /* min-width: 1200px; */
   min-height: 100vh;
   background-color: black;
 }
@@ -61,7 +61,8 @@ button:focus-visible {
 }
 
 /* mine css */
-.container-home-grid {
+/* before the fixed library */
+/* .container-home-grid {
   margin-top: 4%;
   margin-bottom: 1%;
   display: grid;
@@ -71,18 +72,47 @@ button:focus-visible {
   width: 100%;
   gap: 10px;
   row-gap: 0;
-  box-sizing: border-box; /* Add this line */
+  box-sizing: border-box; /* Add this line 
+} */
+.container-home-grid {
+  position: relative;
+  margin-top: 70px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 69%;
+  justify-content: end;
+
+  height: 100vh;
+  /* width: 100%; */
+  /* gap: 10px; */
+  /* row-gap: 0; */
+  height: calc(100vh - 64px);
+  box-sizing: border-box;
 }
-.container-about-grid {
+
+.container-about-album-grid {
+  margin-top: 70px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 69%;
+  grid-template-rows: 45% 55%;
+  justify-content: end;
+  height: 100vh;
+  width: 100%;
+
+  /* gap: 13px; */
+}
+/* .container-about-grid {
   margin-top: 4%;
   margin-bottom: 1%;
   display: grid;
-  grid-template: 40% 60% / 30% 70%;
+  grid-template-columns: 69%;
 
+  justify-content: end;
   height: 100vh;
   width: 100%;
-  /* gap: 13px; */
-}
+  /* gap: 13px; 
+} */
 
 .grid-bottom-right-cell-about {
   grid-template: 40% 20% 20% 20% / 80% 13% 7%;
@@ -92,18 +122,24 @@ button:focus-visible {
   padding-left: 5px;
 }
 
-.card-artist-grid-item {
+.cards-artists-albums-grid-item {
   border-radius: 10px;
   background: linear-gradient(to bottom right, #282828, #000000);
 }
-.card-album-grid-item {
+/* .card-album-grid-item {
   background-color: rgb(30, 30, 30);
-}
+} */
 
 .your-library-grid-item {
+  /* CHANGED THE PSOTION TO FIXED */
+  /* width: 30%; */
+
+  position: sticky;
+  top: 70px; /* Adjust as needed */
   border-radius: 10px;
+  height: 100vh;
   background-color: rgb(30, 30, 30);
-  grid-row: 1 / span 2;
+  /* grid-row: 1 / span 2; */
 }
 
 .popular-albums-and-singles-grid-item {
@@ -114,9 +150,12 @@ button:focus-visible {
   background-color: #0a406f;
 }
 
+input {
+  accent-color: rgb(63, 206, 27);
+}
 /* PlayerDev */
 
-.componentPlayerDEV {
+/* .componentPlayerDEV {
   background-color: white;
   width: 25%;
   max-width: 600px;
@@ -158,11 +197,29 @@ button:focus-visible {
 
 input[type="range"] {
   background-color: #27ae60;
+} */
+.sliders-albums {
+  width: 50%;
 }
-
-@media (max-width: 900px) {
+@media (max-width: 530px) {
   .component {
     width: 50%;
+  }
+
+  .container-home-grid {
+    position: relative;
+    margin-top: 70px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 90%;
+    justify-content: center;
+
+    height: 100vh;
+    /* width: 100%; */
+    /* gap: 10px; */
+    /* row-gap: 0; */
+    height: calc(100vh - 64px);
+    box-sizing: border-box;
   }
 }
 
@@ -173,6 +230,7 @@ input[type="range"] {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }

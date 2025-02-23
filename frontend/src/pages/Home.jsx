@@ -11,6 +11,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderHome from "../components/SliderHome";
+import SliderAlbums from "../components/SliderAlbums";
+import { Box } from "@mui/material";
 function Home() {
   const { artists, dispatch } = useContext(ArtistsContext);
   const { newSongDispatch } = useContext(NewSongsContext);
@@ -34,25 +36,15 @@ function Home() {
 
   return (
     <main className="container-home-grid">
-      <div className="your-library-grid-item">
+      {/* <div className="your-library-grid-item">
         <h2>Your Library</h2>
-      </div>
+      </div> */}
 
       <div
         style={{ display: "flex", flexDirection: "column" }}
-        className="card-artist-grid-item"
+        className="cards-artists-albums-grid-item"
       >
-        {/* <div
-          style={{ display: "flex" }}
-          className="topic-popular-artists-grid-item"
-        > */}
-
-        {/* </div> */}
-
-        {/* removed flex wrap XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
-
-        {/* <Carousel> */}
-        <div style={{ width: "70%", marginLeft: "5%" }}>
+        <div className="sliders" style={{ width: "70%", marginLeft: "5%" }}>
           <h2
             className="topic-popular-artists-grid-item"
             style={{ display: "flex" }}
@@ -65,37 +57,15 @@ function Home() {
             })}
           </SliderHome>
         </div>
-        <div style={{ width: "70%", marginLeft: "5%" }}>
+        <div className="sliders-albums" style={{ marginLeft: "5%" }}>
           <h2 style={{ display: "flex" }}>Popular albums and singels</h2>
-          <SliderHome>
-            {artists.map((artist) => {
+          <SliderAlbums>
+            {artists.slice(0, 3).map((artist) => {
               return <CardActionAlbum key={artist._id} artist={artist} />;
             })}
-          </SliderHome>
+          </SliderAlbums>
         </div>
-
-        {/* </Carousel> */}
       </div>
-
-      {/* BELOW IS NOT RELEVANT */}
-      {/* <div
-        style={{ display: "flex", flexDirection: "column" }}
-        className="card-album-grid-item"
-      >
-        <div
-          style={{ display: "flex" }}
-          className="topic-popular-artists-grid-item"
-        >
-          <h2>Popular Albums and singles</h2>
-        </div>
-        <div style={{ width: "70%" }}>
-          <Slider {...settings}>
-            {artists.map((artist) => {
-              return <CardActionAlbum key={artist._id} artist={artist} />;
-            })}
-          </Slider>
-        </div>
-      </div> */}
     </main>
   );
 }

@@ -5,6 +5,7 @@ import "../index.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MediaControlCard from "../components/MediaControlCard";
+// import CircularIndeterminate from "../components/CircularIndeterminate";
 
 function AboutArtist() {
   const { id } = useParams(); // Extract the artist ID from the URL parameters
@@ -33,78 +34,83 @@ function AboutArtist() {
 
   // If the artist data is not found, display a loading message
   if (!artist) {
-    return <div>Loading...</div>;
+    return <div>loading</div>;
   }
 
   // Render the artist details once the data is found
   return (
-    <main className="container-about-grid">
-      <div className="your-library-grid-item">
-        <h2>Your Library</h2>
-      </div>
-      <Box
-        component="section"
-        sx={{
-          position: "relative", // Set position to relative to contain the absolute positioned elements
-          display: "flex",
-          backgroundColor: "black",
-          width: "100%", // Make the Box full width
-          overflow: "hidden", // Hide overflow to ensure the image fits within the Box
-          zIndex: 0, // Ensure the image stays below other elements
-        }}
-      >
-        {artist && (
-          <>
-            <img
-              style={{
-                position: "fixed", // Make the image sticky XXXXXXXXXXXXXXXXXXXXXXX
+    <main>
+      <Box className="container-about-album-grid">
+        <Box
+          component="section"
+          sx={{
+            backgroundColor: "black",
+            width: "100%", // Make the Box full width
 
-                width: "68.7%", // Make the image full width
-                height: "40%", // Make the image full height
-                objectFit: "cover", // Cover the entire Box area
-                objectPosition: "center 30%", // Focus slightly down from the top
-                // position: "sticky", // Make the image sticky XXXXXXXXXXXXXXXXXXXXXXX
-                // top: "0", // Stick to the top of the viewport XXXXXXXXXXXXXXXXXXXXXXX
-                // width: "100%", // Make the image full width
-                // height: "100%", // Make the image full height
-                // objectFit: "cover", // Cover the entire Box area
-                // objectPosition: "center 30%", // Focus slightly down from the top
-                zIndex: -1, // Ensure the image stays below other elements
-              }}
-              src={artist.image}
-              alt={artist.name}
-            />
-            <Box
-              sx={{
-                position: "absolute", // Position the text absolutely within the relative Box
-                top: "50%", // Center the text vertically
-                left: "50%", // Center the text horizontally
-                transform: "translate(-50%, -50%)", // Adjust the position to truly center the text
-                color: "white", // Set the text color to white
-                textAlign: "center", // Center align the text
-                zIndex: 1, // Ensure the text is above the image
-              }}
-            >
-              <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-                {artist.name}
-              </Typography>
-              <Typography variant="h5">{artist.type}</Typography>
-            </Box>
-          </>
-        )}
-      </Box>
-      <Box
-        component="section"
-        className="flex-bottom-right-cell-about"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "ghostwhite",
-          color: "black",
-          zIndex: 0, // Ensure the image stays below other elements
-        }}
-      >
-        <MediaControlCard />
+            // overflow: "hidden", // Hide overflow to ensure the image fits within the Box
+            zIndex: 0, // Ensure the image stays below other elements
+            position: "relative", // Ensure the child elements are positioned relative to this Box
+          }}
+        >
+          {artist && (
+            <>
+              <Box
+                sx={{
+                  position: "sticky",
+                  top: "80px",
+                  width: "100%", // Make the image full width
+                  height: "30%", // Make the image full height
+                  // objectFit: "cover", // Cover the entire Box area
+
+                  objectPosition: "center 30%", // Focus slightly down from the top
+                }}
+              >
+                <img
+                  style={{
+                    height: 800,
+                    borderRadius: 10,
+                    objectFit: "cover", // Cover the entire Box area
+                    width: "100%", // Make the image full width
+                    zIndex: -1, // Ensure the image stays below other elements
+                    marginBottom: -95,
+                  }}
+                  src={artist.image}
+                  alt={artist.name}
+                />
+              </Box>
+              <Box
+                sx={{
+                  position: "absolute", // Position the text absolutely within the relative Box
+                  top: "50%", // Center the text vertically
+                  left: "50%", // Center the text horizontally
+                  transform: "translate(-50%, -50%)", // Adjust the position to truly center the text
+                  color: "white", // Set the text color to white
+                  textAlign: "center", // Center align the text
+                  zIndex: 1, // Ensure the text is above the image
+                }}
+              >
+                <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+                  {artist.name}
+                </Typography>
+                <Typography variant="h5">{artist.type}</Typography>
+              </Box>
+            </>
+          )}
+        </Box>
+        <Box
+          component="section"
+          className="flex-bottom-right-cell-about"
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "ghostwhite",
+            color: "black",
+            zIndex: 0, // Ensure the image stays below other elements
+          }}
+        >
+          <MediaControlCard />
+        </Box>
       </Box>
     </main>
   );
