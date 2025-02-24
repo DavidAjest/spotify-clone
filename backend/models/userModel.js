@@ -21,6 +21,11 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+
+    likedSongs: {
+      type: [],
+      required: false,
+    },
   }
   // adds anoter propery for the creation of the object
 );

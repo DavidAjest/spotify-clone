@@ -15,6 +15,9 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import PauseIcon from "@mui/icons-material/Pause";
 import { NewSongsContext } from "../context/NewSongContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+
+import AddLikedSong from "./AddLikedSong";
 
 export default function BottomMediaControl() {
   const {
@@ -26,6 +29,12 @@ export default function BottomMediaControl() {
     newSongDispatch,
     artist,
   } = useContext(NewSongsContext);
+
+  const { user } = useAuthContext();
+
+  // ADDING SONG TO USER MODEL
+
+  //ADDING SONG TO USER MODEL
 
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
 
@@ -157,6 +166,8 @@ export default function BottomMediaControl() {
                 </Typography>
               </CardContent>
             </Box>
+
+            {user && bottomCurrentSong && <AddLikedSong />}
           </Box>
           <Box
             sx={{

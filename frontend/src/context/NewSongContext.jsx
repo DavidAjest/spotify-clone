@@ -21,7 +21,10 @@ export const songReducer = (state, action) => {
       return { ...state, currentTime: action.payload };
     case "SET_ARTIST":
       return { ...state, artist: action.payload };
-
+    case "LIKE_SONG":
+      return { ...state, isLikedSong: true };
+    case "UN_LIKE_SONG":
+      return { ...state, isLikedSong: false };
     default:
       return state;
   }
@@ -36,6 +39,7 @@ export const NewSongContextProvider = ({ children }) => {
     currentTime: {},
     artist: null,
     songs: [],
+    isLikedSong: false,
   });
 
   const playingButton = (isPlaying, playerRef, currentSong, song_id) => {

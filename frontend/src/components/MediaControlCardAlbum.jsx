@@ -29,7 +29,7 @@ export default function MediaControlCardAlbum() {
   // console.log("this is artist songs", artistSongs[0]?.album);
   // console.log("this is artist ", artist?.albums?.[0]);
 
-  console.log("this is songsOfSpecificAlbum", songsOfSpecificAlbum);
+  // console.log("this is songsOfSpecificAlbum", songsOfSpecificAlbum);
   useEffect(() => {
     async function getartistSongsByArtist() {
       if (artistSongs.length < 1 || !artist) {

@@ -12,10 +12,14 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.login(email, password);
 
+    // console.log(email, password);
     //create a token
+    console.log("from the user controller", email);
     const token = createToken(user._id);
+    const likedSongs = user.likedSongs;
+    console.log(likedSongs);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, likedSongs });
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
@@ -36,4 +40,28 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser };
+const addLikedSong = async (req, res) => {
+  const { email, songId } = req.body;
+  console.log("im in the add liked song function!");
+  console.log("Email:", email);
+  console.log("SongId:", songId);
+  try {
+    const user = await User.findOne({ email });
+    // await User.updateOne({ _id: user._id }, { $set: { likedSongs: [] } });
+
+    if (!user) {
+      return res.status(400).json({ error: "no such user" });
+    }
+    if (user.likedSongs.includes(songId)) {
+      return res.status(400).json({ error: "song already exists" });
+    }
+
+    await User.updateOne({ _id: user._id }, { $push: { likedSongs: songId } });
+    //removed from the res.json ==> , songId
+    res.status(200).json({ user });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+module.exports = { signupUser, loginUser, addLikedSong };
