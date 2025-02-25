@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 // import CssBaseline from "@mui/material/CssBaseline";
 //pages
 import Home from "./pages/Home";
@@ -17,66 +18,75 @@ import { AuthContextProvider } from "./context/AuthContext.jsx";
 import Signup from "./pages/Signup.jsx";
 
 function App() {
+  const { user } = useAuthContext();
   return (
     <div className="App">
-      <AuthContextProvider>
-        <BrowserRouter>
-          <ArtistContextProvider>
-            <NewSongContextProvider>
-              {/* <Navbar /> */}
+      {/* <AuthContextProvider> */}
+      <BrowserRouter>
+        <ArtistContextProvider>
+          <NewSongContextProvider>
+            {/* <Navbar /> */}
 
-              <div className="pages">
-                <Routes>
-                  {" "}
-                  <Route
-                    path="/home"
-                    element={
-                      <>
-                        <Home /> <ResponsiveNavBarDrawer />
-                      </>
-                    }
-                  />
-                  <Route
-                    path="/api/artists/:id"
-                    element={
-                      <>
-                        <AboutArtist /> <ResponsiveNavBarDrawer />
-                      </>
-                    }
-                  />
-                  <Route
-                    path="/api/artists/album/:id"
-                    element={
-                      <>
-                        <ArtistAlbum /> <ResponsiveNavBarDrawer />
-                      </>
-                    }
-                  />
-                  <Route
-                    path="/api/user/login"
-                    element={
+            <div className="pages">
+              <Routes>
+                {" "}
+                <Route
+                  path="/home"
+                  element={
+                    <>
+                      <Home /> <ResponsiveNavBarDrawer />
+                      <BottomMediaControl />
+                    </>
+                  }
+                />
+                <Route
+                  path="/api/artists/:id"
+                  element={
+                    <>
+                      <AboutArtist /> <ResponsiveNavBarDrawer />
+                      <BottomMediaControl />
+                    </>
+                  }
+                />
+                <Route
+                  path="/api/artists/album/:id"
+                  element={
+                    <>
+                      <ArtistAlbum /> <ResponsiveNavBarDrawer />
+                      <BottomMediaControl />
+                    </>
+                  }
+                />
+                <Route
+                  path="/api/user/login"
+                  element={
+                    !user ? (
                       <>
                         <Login />
-                        <ResponsiveNavBarDrawer />
+                        <Navbar />
+                        {/* <ResponsiveNavBarDrawer /> */}
                       </>
-                    }
-                  />
-                  <Route
-                    path="/api/user/signup"
-                    element={
-                      <>
-                        <Signup />
-                        <ResponsiveNavBarDrawer />
-                      </>
-                    }
-                  />
-                </Routes>
-              </div>
-              <BottomMediaControl />
-            </NewSongContextProvider>
-          </ArtistContextProvider>
-        </BrowserRouter>
-      </AuthContextProvider>
+                    ) : (
+                      <Navigate to="/home" />
+                    )
+                  }
+                />
+                <Route
+                  path="/api/user/signup"
+                  element={
+                    <>
+                      <Signup />
+                      <ResponsiveNavBarDrawer />
+                    </>
+                  }
+                />
+              </Routes>
+            </div>
+            {/* <BottomMediaControl /> */}
+          </NewSongContextProvider>
+        </ArtistContextProvider>
+      </BrowserRouter>
+      {/* </AuthContextProvider> */}
     </div>
   );
 }

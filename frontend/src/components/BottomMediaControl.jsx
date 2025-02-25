@@ -32,10 +32,6 @@ export default function BottomMediaControl() {
 
   const { user } = useAuthContext();
 
-  // ADDING SONG TO USER MODEL
-
-  //ADDING SONG TO USER MODEL
-
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
 
   const [currentTime, setCurrentTime] = useState(0);

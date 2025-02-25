@@ -13,10 +13,17 @@ export const authReducer = (state, action) => {
     case "LOGOUT":
       return { user: null, likedSongs: [] };
     case "ADD_LIKED_SONG":
-      console.log("im in reducer");
       return {
         ...state,
         likedSongs: [...state.likedSongs, action.payload],
+      };
+    case "REMOVE_LIKED_SONG":
+      console.log("im in reducer REMOVE_LIKED_SONG");
+      return {
+        ...state,
+        likedSongs: state.likedSongs.filter(
+          (songId) => songId !== action.payload
+        ),
       };
     default:
       return state;

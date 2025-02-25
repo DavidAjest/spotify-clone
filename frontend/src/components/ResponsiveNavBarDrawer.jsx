@@ -116,7 +116,15 @@ function ResponsiveNavBarDrawer(props) {
         </Toolbar>
       </AppBar>
 
-      {!user ? (
+      <DrawerLibrary
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerTransitionEnd={handleDrawerTransitionEnd}
+        handleDrawerToggle={handleDrawerToggle}
+        mobileOpen={mobileOpen}
+        props={props}
+      />
+
+      {/* {!user ? (
         <h2>Please sign in first</h2>
       ) : (
         <DrawerLibrary
@@ -126,7 +134,7 @@ function ResponsiveNavBarDrawer(props) {
           mobileOpen={mobileOpen}
           props={props}
         />
-      )}
+      )} */}
     </Box>
   );
 }

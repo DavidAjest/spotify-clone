@@ -6,6 +6,7 @@ const {
   signupUser,
   loginUser,
   addLikedSong,
+  removeLikedSong,
 } = require("../controllers/userController");
 
 //login route
@@ -15,4 +16,7 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 router.post("/addLikedSong", addLikedSong);
+
+//delete liked song from user
+router.delete("/removeLikedSong", removeLikedSong);
 module.exports = router;

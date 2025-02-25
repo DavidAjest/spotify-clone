@@ -64,4 +64,30 @@ const addLikedSong = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, addLikedSong };
+const removeLikedSong = async (req, res) => {
+  const { email, songId } = req.body;
+  console.log("im in the removeLikedSong  function!");
+  console.log("Email:", email);
+  console.log("SongId:", songId);
+  try {
+    const user = await User.findOne({ email });
+    // await User.updateOne({ _id: user._id }, { $set: { likedSongs: [] } });
+
+    if (!user) {
+      return res.status(400).json({ error: "no such user" });
+    }
+    if (!user.likedSongs.includes(songId)) {
+      return res
+        .status(400)
+        .json({ error: "Theres no song like that, in the likedSongs array" });
+    }
+
+    await User.updateOne({ _id: user._id }, { $pull: { likedSongs: songId } });
+    //removed from the res.json ==> , songId
+    res.status(200).json({ user });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+module.exports = { removeLikedSong, signupUser, loginUser, addLikedSong };
