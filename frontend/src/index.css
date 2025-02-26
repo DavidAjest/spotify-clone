@@ -153,6 +153,9 @@ button:focus-visible {
 input {
   accent-color: rgb(63, 206, 27);
 }
+.input-volume {
+  accent-color: rgb(255, 255, 255);
+}
 /* PlayerDev */
 
 /* .componentPlayerDEV {
@@ -201,7 +204,7 @@ input[type="range"] {
 .sliders-albums {
   width: 50%;
 }
-@media (max-width: 530px) {
+@media (max-width: 580px) {
   .component {
     width: 50%;
   }
@@ -214,12 +217,31 @@ input[type="range"] {
     grid-template-columns: 90%;
     justify-content: center;
 
-    height: 100vh;
     /* width: 100%; */
     /* gap: 10px; */
     /* row-gap: 0; */
-    height: calc(100vh - 64px);
+    height: 110vh;
     box-sizing: border-box;
+  }
+
+  .container-about-album-grid {
+    position: relative;
+    margin-top: 70px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 90%;
+    justify-content: center;
+
+    /* width: 100%; */
+    /* gap: 10px; */
+    /* row-gap: 0; */
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .player {
+    flex-direction: column;
+    width: 400px;
   }
 }
 

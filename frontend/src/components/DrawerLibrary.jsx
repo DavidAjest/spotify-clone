@@ -60,11 +60,18 @@ export default function DrawerLibrary({
   // console.log("this is from Drawer Library", likedSongs);
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
+      <Toolbar sx={{ marginBottom: "0" }} />
+      {/* <Divider /> */}
       {user ? (
         <List sx={{ color: "blue" }}>
-          <Typography variant="h5" sx={{ color: "white" }}>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "rgba(255, 255, 255, 0.87)",
+            }}
+          >
             Liked Songs
           </Typography>
           {likedSongsByUser.map((song) => (
@@ -217,7 +224,7 @@ export default function DrawerLibrary({
           display: { xs: "block", sm: "none" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-
+            backgroundColor: "black",
             zIndex: 0,
           },
         }}
@@ -236,6 +243,7 @@ export default function DrawerLibrary({
             borderRadius: "10px",
             marginBottom: `30%`,
             marginLeft: 2,
+            minWidth: "350px",
           },
         }}
         open

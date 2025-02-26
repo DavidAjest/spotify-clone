@@ -63,7 +63,7 @@ function App() {
                     !user ? (
                       <>
                         <Login />
-                        <Navbar />
+
                         {/* <ResponsiveNavBarDrawer /> */}
                       </>
                     ) : (
@@ -74,10 +74,14 @@ function App() {
                 <Route
                   path="/api/user/signup"
                   element={
-                    <>
-                      <Signup />
-                      <ResponsiveNavBarDrawer />
-                    </>
+                    !user ? (
+                      <>
+                        <Signup />
+                        {/* <ResponsiveNavBarDrawer /> */}
+                      </>
+                    ) : (
+                      <Navigate to="/home" />
+                    )
                   }
                 />
               </Routes>

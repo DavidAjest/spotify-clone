@@ -5,7 +5,7 @@
     "genre": "pop",
     "duration": 207,
     "releaseDate": "2021-09-10",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://i.scdn.co/image/ab67616d0000b273a9473656bdf001fd00a4fa13",
     "urlOfSong": "https://www.youtube.com/watch?v=Il0S8BoucSA",
     "artists": ["Ed Sheeran"]
   },
@@ -25,7 +25,7 @@
     "genre": "pop",
     "duration": 207,
     "releaseDate": "2021-09-10",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://cdn-images.dzcdn.net/images/cover/007b5e41dae0dd99ade00f509db734d4/1900x1900-000000-80-0-0.jpg",
     "urlOfSong": "https://www.youtube.com/watch?v=kPhpHvnnn0Q",
     "artists": ["Ed Sheeran"]
   },
@@ -35,7 +35,7 @@
     "genre": "pop",
     "duration": 207,
     "releaseDate": "2021-09-10",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://images.genius.com/11d6dfb73fe30af8c34457fdac6a7115.720x720x1.jpg",
     "urlOfSong": "https://www.youtube.com/watch?v=IyaQfwMoYVA",
     "artists": ["Ed Sheeran"]
   },
@@ -45,7 +45,7 @@
     "genre": "pop",
     "duration": 233,
     "releaseDate": "2012-10-01",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://halleonard-coverimages.s3.amazonaws.com/wl/00115990-wl.jpg",
     "urlOfSong": "https://www.youtube.com/watch?v=OK_b2-w0u60",
     "artists": ["Bruno Mars"]
   },
@@ -55,27 +55,18 @@
     "genre": "pop",
     "duration": 233,
     "releaseDate": "2012-10-01",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://www.billboard.com/wp-content/uploads/2021/03/bruno-mars-2010-grenade-mv-still-billboard-1548-1615404619.jpg",
     "urlOfSong": "https://www.youtube.com/watch?v=4YrzJ9RZ9qY",
     "artists": ["Bruno Mars"]
   },
-  {
-    "title": "The Lazy Song",
-    "album": "Unorthodox Jukebox",
-    "genre": "pop",
-    "duration": 233,
-    "releaseDate": "2012-10-01",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
-    "urlOfSong": "https://www.youtube.com/watch?v=GYW87vbSxjg",
-    "artists": ["Bruno Mars"]
-  },
+
   {
     "title": "As It Was",
     "album": "Harry's House",
     "genre": "pop",
     "duration": 167,
     "releaseDate": "2022-04-01",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14",
     "urlOfSong": "https://www.youtube.com/watch?v=Qfm6nfz1QNQ",
     "artists": ["Harry Styles"]
   },
@@ -85,8 +76,18 @@
     "genre": "pop",
     "duration": 213,
     "releaseDate": "2022-04-01",
-    "image": "https://i.scdn.co/image/ab6761610000e5eb784daff754ecfe0464ddbeb9",
+    "image": "https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2019/10/hs-website-asset-2019-sq.jpg",
     "urlOfSong": "https://www.youtube.com/watch?v=z9gJr2lwzRU",
     "artists": ["Harry Styles"]
+  },
+  {
+    "title": "Epic Inspirational ",
+    "album": "Harry's House",
+    "genre": "pop",
+    "duration": 213,
+    "releaseDate": "2022-04-01",
+    "image": "https://media.istockphoto.com/id/512893193/photo/post-box.jpg?s=2048x2048&w=is&k=20&c=Inn-kS3tgNM1YwAn2mL3SCSkUUJW0UhZye7fmdoHpmM=",
+    "urlOfSong": "https://www.youtube.com/watch?v=9tM7xr7qeho&list=RDQMIRROz47kCkg&start_radio=1",
+    "artists": ["NoCopyRight"]
   }
 ]

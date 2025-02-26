@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import ReactPlayer from "react-player";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -16,6 +17,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import PauseIcon from "@mui/icons-material/Pause";
 import { NewSongsContext } from "../context/NewSongContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 
 import AddLikedSong from "./AddLikedSong";
 
@@ -36,6 +38,8 @@ export default function BottomMediaControl() {
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentVolume, setCurrentVolume] = useState(1);
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -67,6 +71,10 @@ export default function BottomMediaControl() {
       clearInterval(myInterval); // Clear the interval when the component is unmounted or dependencies change
     };
   }, [currentSong, playerRefs, isPlaying]);
+
+  useEffect(() => {
+    const updateWhenDifUser = () => {};
+  }, [user]);
 
   const handleNextSong = () => {
     const currentIndexSongPlaying = songs.findIndex(
@@ -116,10 +124,12 @@ export default function BottomMediaControl() {
         elevation={3}
       >
         <Card
+          className="player"
           sx={{
             backgroundColor: "black",
             width: "100%",
             display: "flex",
+
             alignItems: "center",
             justifyContent: "space-between",
           }}
@@ -231,6 +241,7 @@ export default function BottomMediaControl() {
                 max={duration || 0} // Ensure max is always defined
                 value={currentTime || 0} // Ensure value is always define
                 onChange={(e) => {
+                  console.log("im e XXXXXXXXXXXXX", e.target.value);
                   const player = playerRefs.current.get(currentSong);
                   setCurrentTime(e.target.value);
                   player.seekTo(e.target.value);
@@ -246,25 +257,51 @@ export default function BottomMediaControl() {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "center",
+              flexDirection: "row",
               pr: 2,
               width: "10%",
+              minWidth: "100px",
             }}
           >
-            <VolumeUpIcon sx={{ color: "white" }} />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                pr: 2,
+              }}
+            >
+              <IconButton onClick={() => setIsMuted(!isMuted)}>
+                {isMuted || currentVolume / 10 === 0 ? (
+                  <VolumeOffIcon sx={{ color: "white" }} />
+                ) : (
+                  <VolumeUpIcon sx={{ color: "white" }} />
+                )}
+              </IconButton>
+
+              <input
+                className="input-volume"
+                style={{ width: "100%" }}
+                type="range"
+                min={0}
+                max={10}
+                value={currentVolume} // Ensure value is always define
+                onChange={(e) => {
+                  setCurrentVolume(e.target.value);
+                }}
+              />
+            </Box>
           </Box>
         </Card>
 
         {bottomCurrentSong && (
           <ReactPlayer
+            volume={currentVolume / 10}
+            muted={isMuted}
             ref={(player) => {
               if (playerRefs) {
-                // YYYYYYYYYYY
-                // console.log("Current Time:", player.getCurrentTime());
-
-                // ++++++++++++++++++++++++++
-                // console.log("playerRefs:", playerRefs);
-                // player = playerRefs.current.has(currentSong);
                 if (!playerRefs.current.has(currentSong)) {
                   playerRefs.current.set(currentSong, player);
                   newSongDispatch({

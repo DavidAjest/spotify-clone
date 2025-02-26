@@ -43,6 +43,7 @@ export const AuthContextProvider = ({ children }) => {
       dispatch({ type: "LOGIN", payload: user });
     }
   }, []);
+
   // When added a new liked song, update the local storage with the new array of liked songs
   useEffect(() => {
     if (state.user) {

@@ -8,6 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 // import { NewSongsContext } from "../context/NewSongContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -73,31 +74,65 @@ function ResponsiveNavBarDrawer(props) {
               width: "100%", // Ensure the Box takes full width
             }}
           >
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+
+                alignItems: "center", // Ensure items are centered vertically
+              }}
+            >
               <Typography variant="h6" noWrap component="div">
-                <Link style={{ color: "white" }} to="/home">
+                <Link style={{ marginRight: 10, color: "white" }} to="/home">
                   {" "}
-                  Spotify welcome {user && user.email}
+                  <MusicNoteIcon sx={{ color: "rgb(63, 206, 27)" }} />{" "}
                 </Link>
               </Typography>
+
+              {user && <h4>Signed in as: {user.email}</h4>}
             </Box>
+
             <Box sx={{ display: "flex" }}>
               {!user && (
                 <Box sx={{ display: "flex" }}>
                   <Typography variant="h6" noWrap component="div">
                     <Link
                       style={{ color: "white", marginRight: "0" }}
-                      to="/api/user/login"
-                    >
-                      <Button> LOGIN </Button>
-                    </Link>
-                  </Typography>
-                  <Typography variant="h6" noWrap component="div">
-                    <Link
-                      style={{ color: "white", marginRight: "0" }}
                       to="/api/user/signup"
                     >
-                      <Button> SINGUP </Button>
+                      <Button
+                        sx={{
+                          fontWeight: "bold",
+                          color: "white",
+                          marginRight: 3,
+                        }}
+                      >
+                        {" "}
+                        SINGUP{" "}
+                      </Button>
+                    </Link>
+                  </Typography>
+                  <Typography variant="h5" noWrap component="div">
+                    <Link
+                      style={{
+                        color: "white",
+                        marginRight: "0",
+                      }}
+                      to="/api/user/login"
+                    >
+                      <Button
+                        sx={{
+                          backgroundColor: "white",
+                          fontWeight: "bold",
+                          color: "black",
+                          height: "auto",
+                          width: "auto",
+                          borderRadius: 20,
+                        }}
+                      >
+                        {" "}
+                        LOGIN{" "}
+                      </Button>
                     </Link>
                   </Typography>
                 </Box>
@@ -106,7 +141,16 @@ function ResponsiveNavBarDrawer(props) {
                 <Box>
                   <Typography variant="h6" noWrap component="div">
                     <Link style={{ color: "white", marginRight: "0" }}>
-                      <Button onClick={() => logout()}> Logout </Button>
+                      <Button
+                        sx={{
+                          fontWeight: "bold",
+                          color: "white",
+                        }}
+                        onClick={() => logout()}
+                      >
+                        {" "}
+                        Logout{" "}
+                      </Button>
                     </Link>
                   </Typography>
                 </Box>

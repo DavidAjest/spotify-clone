@@ -108,7 +108,7 @@ function AboutArtist() {
             zIndex: 0, // Ensure the image stays below other elements
           }}
         >
-          <MediaControlCardAlbum />;
+          <MediaControlCardAlbum />
         </Box>
       </Box>
     </main>

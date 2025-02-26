@@ -2,13 +2,14 @@ import React from "react";
 import SlickSlider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { colors } from "@mui/material";
 
 export default function SliderHome({ children }) {
   const settings = {
     accessibility: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
       {
@@ -20,19 +21,21 @@ export default function SliderHome({ children }) {
         },
       },
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
+          arrows: false,
         },
       },
       {
         breakpoint: 530,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          arrows: false,
         },
       },
       {
@@ -40,6 +43,7 @@ export default function SliderHome({ children }) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],

@@ -41,21 +41,26 @@ function Home() {
       </div> */}
 
       <div
-        style={{ display: "flex", flexDirection: "column" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
         className="cards-artists-albums-grid-item"
       >
-        <div className="sliders" style={{ width: "70%", marginLeft: "5%" }}>
+        <div style={{ width: "70%", marginLeft: "5%" }}>
           <h2
             className="topic-popular-artists-grid-item"
             style={{ display: "flex" }}
           >
             Popular Artists
           </h2>
-          <SliderHome>
-            {artists.map((artist) => {
-              return <CardActionArtist key={artist._id} artist={artist} />;
-            })}
-          </SliderHome>
+          <div className="sliders">
+            <SliderHome>
+              {artists.map((artist) => {
+                return <CardActionArtist key={artist._id} artist={artist} />;
+              })}
+            </SliderHome>
+          </div>
         </div>
         <div className="sliders-albums" style={{ marginLeft: "5%" }}>
           <h2 style={{ display: "flex" }}>Popular albums and singels</h2>
