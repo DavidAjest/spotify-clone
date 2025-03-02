@@ -1,0 +1,125 @@
+[33mcommit 09a8c525c3c177b61d11de305fac093cb231ab42[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 26 19:50:33 2025 +0200
+
+    added volume control. added a no copy righter song for video of the website to demonstrate with. improved resposivnes
+
+[33mcommit 9552d661a6c6bfa428cee966677de60d664a184b[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Tue Feb 25 15:10:56 2025 +0200
+
+    moved the auth context provider to main.jsx for allowing user availible within the app compoenet. added style and functiality (added remove/add song route and logic) to the 'like songs library'
+
+[33mcommit 9055db2f011531f29014f76801d21a139025671c[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Mon Feb 24 16:17:27 2025 +0200
+
+    added route for liked songs for adding a song to a specific user by email. added liked songs for a specific user in the DrawerLibrary component
+
+[33mcommit 8ff55470c2030275e399b263ddaa745d042a1197[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Sun Feb 23 09:59:54 2025 +0200
+
+    added drawer compoenent, added user model and AuthContext
+
+[33mcommit 82f0e63218e3670b361d3a15390240b95f89af27[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 19 15:14:55 2025 +0200
+
+    added slider compoenent from react-slick
+
+[33mcommit 7eebf11d20a84ddf32117656f5876f54dfb1acc1[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 19 10:19:59 2025 +0200
+
+    commiting before orginizing\refactoring the code
+
+[33mcommit 022e871e6dc69024a1146866fd3f118de37251f9[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Tue Feb 18 14:53:17 2025 +0200
+
+    added player. including: nextSong, prevSong, input range functionality
+
+[33mcommit 4473602698673a12c9cd808cb85708f4f35fc1ea[m[33m ([m[1;32mtemp-branch-2[m[33m)[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Mon Feb 17 11:10:34 2025 +0200
+
+    fixed the issue of playing the song in diffrent page, but making the bottom-player, be the only one containing the ReactPlayer componenet
+
+[33mcommit 4b8193dd10ea131ff85f91f9543b800970eb93bc[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Sun Feb 16 11:30:33 2025 +0200
+
+    added a new context of song, new bottom media compoenet, and removed all props trensfering, Next : Solve the issue with changing page to Home and getting null on the current time in the Aritst:id page
+
+[33mcommit 40e36f586a228e4b21646f982b8bfda4d9b55ab3[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Tue Feb 11 12:24:53 2025 +0200
+
+    added bottom bar, saving before trying to set songContext right
+
+[33mcommit 8051edaaa40201f738c3ed8916743dbbcdb8facb[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Sun Feb 9 19:44:56 2025 +0200
+
+    added search from the Spotify API. player consts money.
+
+[33mcommit d0b5b8ba473e02e1967d674a6fdf7269d8fb1d39[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Thu Feb 6 20:48:10 2025 +0200
+
+    added the songs to the AboutPage from the populated song field of artist, and added style to About page
+
+[33mcommit 85bc4f32afae84c4205bfd7209140017b0cb2369[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Thu Feb 6 16:48:58 2025 +0200
+
+    added AboutArtist page with basic grid and the MediaControlCompoenet
+
+[33mcommit f280cd26349f2a28b23d7f03ab6335f7b27d4c7d[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Thu Feb 6 14:05:26 2025 +0200
+
+    had truble with gettin the json from the front by using proxy in the package json, solved it with Corsby adding the cors middleware
+
+[33mcommit 41796d1c2618490fdbceb9516ec09d67434073c5[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 5 18:55:36 2025 +0200
+
+    added seeds to song model and artist model
+
+[33mcommit bb3a9d4cc9fcb0b1b16d24677bfdcf0328eac45c[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 5 15:21:30 2025 +0200
+
+    made a new model artist, and started to design of the many to many relationship of artist and song
+
+[33mcommit 1f4a4b5b80d3eba0cbf8792796832afd75803cf0[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 5 15:14:24 2025 +0200
+
+    got json about bruno mars, using curl, and saved the json in artists.json
+
+[33mcommit f10f4ea12cbc76f520a728de408175612ba47f5f[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Wed Feb 5 11:39:12 2025 +0200
+
+    finished basic Grid Settings for home page
+
+[33mcommit a88ed7669d5c06c36a4b6fae102ffadd2355440f[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Mon Feb 3 19:58:30 2025 +0200
+
+    added routes with basic error handeling
+
+[33mcommit 70d29bd5fbe91f0fdc4bf37f14e1cf8388611629[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Mon Feb 3 15:52:05 2025 +0200
+
+    added console.log(hello)
+
+[33mcommit a0d96af28983d0a5f80cbcc0d3b32c8f3dcd02b9[m
+Author: David Etin <ajest123@gmail.com>
+Date:   Mon Feb 3 15:46:56 2025 +0200
+
+    Initial commit, added server.js

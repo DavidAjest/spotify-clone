@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { NewSongsContext } from "../context/NewSongContext";
 import { useParams } from "react-router-dom";
 export default function MediaControlCard() {
@@ -17,23 +17,34 @@ export default function MediaControlCard() {
     playerRefs,
     playingButton,
     newSongDispatch,
-    artist,
-
     isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
-  const artistSongs = songs.filter((song) => song.artists.includes(id));
+  const [artistSongs, setArtistSongs] = useState();
 
   useEffect(() => {
-    async function getartistSongsByArtist() {
-      if (artistSongs.length < 1) {
+    async function getArtistSongsByArtist() {
+      let filteredSongs = songs.filter((song) => song.artists.includes(id));
+      setArtistSongs(filteredSongs);
+      if (filteredSongs.length < 1) {
         const response = await fetch(`http://localhost:5000/api/artists/${id}`);
         const json = await response.json();
-
-        newSongDispatch({ type: "SET_SONGS", payload: json[0].songs });
+        setArtistSongs(json[0].songs);
+        console.log("this is artists songs", filteredSongs);
       }
     }
-    getartistSongsByArtist();
-  }, [artist, id, newSongDispatch, artistSongs.length, isPlaying, currentSong]); // Add id and artists to the dependency array
+    getArtistSongsByArtist();
+  }, [id, songs]);
+
+  useEffect(() => {
+    async function storeAllSongs() {
+      const response = await fetch(`http://localhost:5000/api/artists`);
+      const json = await response.json();
+      const allSongs = json.flatMap((artist) => artist.songs);
+
+      newSongDispatch({ type: "SET_SONGS", payload: allSongs });
+    }
+    storeAllSongs();
+  }, [newSongDispatch]); // Add id and artists to the dependency array
 
   if (!artistSongs) {
     return <div>Loading...</div>;

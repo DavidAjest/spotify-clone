@@ -2,7 +2,7 @@ import { useContext } from "react";
 // import PropTypes from "prop-types";
 // import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
+// import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 // import InboxIcon from "@mui/icons-material/MoveToInbox";
@@ -39,8 +39,8 @@ export default function DrawerLibrary({
     songs,
     playerRefs,
     playingButton,
-    newSongDispatch,
-    artist,
+    // newSongDispatch,
+    // artist,
     isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
 
@@ -202,7 +202,7 @@ export default function DrawerLibrary({
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  console.log("this is user", user);
+
   return (
     <Box
       component="nav"
