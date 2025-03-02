@@ -3,7 +3,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 // import CssBaseline from "@mui/material/CssBaseline";
 //pages
 import Home from "./pages/Home";
-import AboutArtist from "./pages/AboutArtist";
+import ArtistSongs from "./pages/ArtistSongs";
 import { ArtistContextProvider } from "./context/ArtistContext";
 import ArtistAlbum from "./pages/ArtistAlbum";
 
@@ -43,7 +43,7 @@ function App() {
                   path="/api/artists/:id"
                   element={
                     <>
-                      <AboutArtist /> <ResponsiveNavBarDrawer />
+                      <ArtistSongs /> <ResponsiveNavBarDrawer />
                       <BottomMediaControl />
                     </>
                   }

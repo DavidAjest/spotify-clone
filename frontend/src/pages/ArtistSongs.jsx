@@ -1,36 +1,35 @@
+// React Hooks
 import { useContext, useEffect, useState } from "react";
+// Navigation/URL related
 import { useParams } from "react-router-dom";
+// Context
 import { ArtistsContext } from "../context/ArtistContext";
-import "../index.css";
+// MUI Components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MediaControlCard from "../components/MediaControlCard";
-// import CircularIndeterminate from "../components/CircularIndeterminate";
+// Services
+import { fetchArtistById } from "../services/artistServices";
+// CSS
 
-function AboutArtist() {
-  const { id } = useParams(); // Extract the artist ID from the URL parameters
-  const { artists } = useContext(ArtistsContext); // Access the artists from the context
+import "../index.css";
+function ArtistSongs() {
+  const { id } = useParams();
+  const { artists } = useContext(ArtistsContext);
   const [artist, setArtist] = useState(null);
 
   useEffect(() => {
-    async function getArtistById() {
-      const artist = artists.find((artist) => artist._id === id);
-
-      if (!artist) {
-        const response = await fetch(`http://localhost:5000/api/artists/${id}`);
-
-        const json = await response.json();
-
-        const artist = json.find((artist) => artist._id === id);
-
-        setArtist(artist); // Set the artist if found
+    async function getArtist() {
+      const artistFromParams = artists.find((artist) => artist._id === id);
+      if (!artistFromParams) {
+        const artistFeched = await fetchArtistById(id);
+        setArtist(artistFeched);
       } else {
-        setArtist(artist);
+        setArtist(artistFromParams);
       }
     }
-
-    getArtistById();
-  }, [id, artists]); // Add id and artists to the dependency array
+    getArtist();
+  }, [id, artists]);
 
   // If the artist data is not found, display a loading message
   if (!artist) {
@@ -116,4 +115,26 @@ function AboutArtist() {
   );
 }
 
-export default AboutArtist;
+export default ArtistSongs;
+
+// old
+
+// useEffect(() => {
+//   async function getArtistById() {
+//     const artist = artists.find((artist) => artist._id === id);
+
+//     if (!artist) {
+//       const response = await fetch(`http://localhost:5000/api/artists/${id}`);
+
+//       const json = await response.json();
+
+//       const artist = json.find((artist) => artist._id === id);
+
+//       setArtist(artist); // Set the artist if found
+//     } else {
+//       setArtist(artist);
+//     }
+//   }
+
+//   getArtistById();
+// }, [id, artists]); // Add id and artists to the dependency array

@@ -247,7 +247,7 @@ export default function BottomMediaControl() {
                   player.seekTo(e.target.value);
                 }}
               />
-              {console.log("current time", currentSong)}
+
               <div>
                 {bottomCurrentSong &&
                   `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`}

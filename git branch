@@ -74,7 +74,7 @@ Date:   Thu Feb 6 20:48:10 2025 +0200
 Author: David Etin <ajest123@gmail.com>
 Date:   Thu Feb 6 16:48:58 2025 +0200
 
-    added AboutArtist page with basic grid and the MediaControlCompoenet
+    added ArtistSongs page with basic grid and the MediaControlCompoenet
 
 [33mcommit f280cd26349f2a28b23d7f03ab6335f7b27d4c7d[m
 Author: David Etin <ajest123@gmail.com>
