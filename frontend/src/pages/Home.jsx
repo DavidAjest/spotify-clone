@@ -1,45 +1,35 @@
+// React Hooks
 import { useContext, useEffect } from "react";
+// Context
 import { ArtistsContext } from "../context/ArtistContext";
+// MUI Components
 import CardActionArtist from "../components/CardActionArtist";
 import CardActionAlbum from "../components/CardActionAlbum";
-import "../index.css";
-import { NewSongsContext } from "../context/newSongContext";
-// CARUSALE NPM
-// import Carousel from "react-material-ui-carousel";
-// import { Paper, Button } from "@mui/material";
-import Slider from "react-slick";
+// React-Slick related libraries
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// Components
 import SliderHome from "../components/SliderHome";
 import SliderAlbums from "../components/SliderAlbums";
-import { Box } from "@mui/material";
+// Services
+import { fetchArtists } from "../services/artistServices";
+// CSS
+import "../index.css";
+
 function Home() {
   const { artists, dispatch } = useContext(ArtistsContext);
-  const { newSongDispatch } = useContext(NewSongsContext);
 
   useEffect(() => {
-    const fetchArtists = async () => {
-      // "proxy": "http://localhost:5000",
-      const response = await fetch("http://localhost:5000/api/artists");
-      const json = await response.json();
-      if (response.ok) {
-        dispatch({ type: "SET_ARTISTS", payload: json });
-        const allSongs = json.flatMap((artist) => artist.songs);
-
-        newSongDispatch({ type: "SET_SONGS", payload: allSongs });
-      } else {
-        console.log(response.status);
-      }
+    const getAllArtists = async () => {
+      const fecthedArtists = await fetchArtists();
+      console.log("this is fecthedArtists", fecthedArtists);
+      dispatch({ type: "SET_ARTISTS", payload: fecthedArtists });
     };
-    fetchArtists();
-  }, [dispatch, newSongDispatch]);
+    getAllArtists();
+  }, [dispatch]);
 
   return (
     <main className="container-home-grid">
-      {/* <div className="your-library-grid-item">
-        <h2>Your Library</h2>
-      </div> */}
-
       <div
         style={{
           display: "flex",

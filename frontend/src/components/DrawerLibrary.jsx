@@ -1,30 +1,29 @@
-import { useContext } from "react";
-// import PropTypes from "prop-types";
-// import AppBar from "@mui/material/AppBar";
+// React Hooks
+import { useContext, useEffect } from "react";
+
+// MUI Components
 import Box from "@mui/material/Box";
-// import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-// import MailIcon from "@mui/icons-material/Mail";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import PauseIcon from "@mui/icons-material/Pause";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+// Navigation/URL related
 import { Link } from "react-router-dom";
+// Context
 import { useAuthContext } from "../hooks/useAuthContext";
+import { ArtistsContext } from "../context/ArtistContext";
 import { NewSongsContext } from "../context/NewSongContext";
-
-// import { NewSongsContext } from "../context/NewSongContext";
-// import { useAuthContext } from "../hooks/useAuthContext";
+// Services
+import { fetchArtists } from "../services/artistServices";
 
 const drawerWidth = `30%`;
 export default function DrawerLibrary({
@@ -39,11 +38,12 @@ export default function DrawerLibrary({
     songs,
     playerRefs,
     playingButton,
-    // newSongDispatch,
+    newSongDispatch,
     // artist,
     isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
 
+  const { dispatch } = useContext(ArtistsContext);
   const { window } = props;
   const { user, likedSongs } = useAuthContext();
 
@@ -51,13 +51,15 @@ export default function DrawerLibrary({
     likedSongs.includes(song._id)
   );
 
-  // // const { artists, dispatch: artistDispatch } = useContext(ArtistsContext);
-  // // const artistOfSongsLiked = artists.filter((artist) =>
-  // //   artist.songs.some((song) => song._id === currentSong)
-  // // );
-  // console.log("this is from drawer ARTIST", artists);
-  // console.log("this is from Drawer Library likedSongsByUser", likedSongsByUser);
-  // console.log("this is from Drawer Library", likedSongs);
+  useEffect(() => {
+    const setAllSongs = async () => {
+      const fecthedArtists = await fetchArtists();
+      const allSongs = fecthedArtists.flatMap((artist) => artist.songs);
+      newSongDispatch({ type: "SET_SONGS", payload: allSongs });
+    };
+    setAllSongs();
+  }, [dispatch, newSongDispatch, songs]);
+
   const drawer = (
     <div>
       <Toolbar sx={{ marginBottom: "0" }} />

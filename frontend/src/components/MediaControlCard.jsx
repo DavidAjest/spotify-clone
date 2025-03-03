@@ -5,9 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import { useContext, useEffect, useRef, useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
 import { NewSongsContext } from "../context/NewSongContext";
 import { useParams } from "react-router-dom";
+import { fetchArtistById } from "../services/artistServices";
 export default function MediaControlCard() {
   const { id } = useParams();
   const {
@@ -16,35 +18,33 @@ export default function MediaControlCard() {
     songs,
     playerRefs,
     playingButton,
-    newSongDispatch,
+    // newSongDispatch,
     isPlayingBottomPlayer,
   } = useContext(NewSongsContext);
   const [artistSongs, setArtistSongs] = useState();
 
+  // useEffect(() => {
+  //   async function storeAllSongs() {
+  //     const response = await fetch(`http://localhost:5000/api/artists`);
+  //     const json = await response.json();
+  //     const allSongs = json.flatMap((artist) => artist.songs);
+  //     newSongDispatch({ type: "SET_SONGS", payload: allSongs });
+  //   }
+  //   storeAllSongs();
+  // }, [newSongDispatch]); // Add id and artists to the dependency array
+
+  // find the songs that are made by specific artist
   useEffect(() => {
     async function getArtistSongsByArtist() {
       let filteredSongs = songs.filter((song) => song.artists.includes(id));
-      setArtistSongs(filteredSongs);
       if (filteredSongs.length < 1) {
-        const response = await fetch(`http://localhost:5000/api/artists/${id}`);
-        const json = await response.json();
-        setArtistSongs(json[0].songs);
-        console.log("this is artists songs", filteredSongs);
+        const fetchedArtist = await fetchArtistById(id);
+        setArtistSongs(fetchedArtist.songs);
       }
+      setArtistSongs(filteredSongs);
     }
     getArtistSongsByArtist();
   }, [id, songs]);
-
-  useEffect(() => {
-    async function storeAllSongs() {
-      const response = await fetch(`http://localhost:5000/api/artists`);
-      const json = await response.json();
-      const allSongs = json.flatMap((artist) => artist.songs);
-
-      newSongDispatch({ type: "SET_SONGS", payload: allSongs });
-    }
-    storeAllSongs();
-  }, [newSongDispatch]); // Add id and artists to the dependency array
 
   if (!artistSongs) {
     return <div>Loading...</div>;
@@ -105,3 +105,20 @@ export default function MediaControlCard() {
     </Box>
   );
 }
+
+// old
+
+// useEffect(() => {
+//   async function getArtistSongsByArtist() {
+//     let filteredSongs = songs.filter((song) => song.artists.includes(id));
+//     if (filteredSongs.length < 1) {
+
+//       const response = await fetch(`http://localhost:5000/api/artists/${id}`);
+//       const json = await response.json();
+//       setArtistSongs(json[0].songs);
+//       console.log("this is artists songs", filteredSongs);
+//     }
+//     setArtistSongs(filteredSongs);
+//   }
+//   getArtistSongsByArtist();
+// }, [id, songs]);

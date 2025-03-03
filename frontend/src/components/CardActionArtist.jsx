@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function CardActionArtist({ artist }) {

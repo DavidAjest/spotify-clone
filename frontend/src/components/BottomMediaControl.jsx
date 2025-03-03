@@ -1,11 +1,9 @@
-// import * as React from "react";
-
-import Box from "@mui/material/Box";
+// React Hooks
 import { useContext, useEffect, useState } from "react";
+// MUI Components
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import ReactPlayer from "react-player";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -15,10 +13,15 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import PauseIcon from "@mui/icons-material/Pause";
-import { NewSongsContext } from "../context/NewSongContext";
-import { useAuthContext } from "../hooks/useAuthContext";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
-
+// Context
+import { NewSongsContext } from "../context/newSongContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+// Services
+import { fetchArtists } from "../services/artistServices";
+// react player package
+import ReactPlayer from "react-player";
+// Componenets
 import AddLikedSong from "./AddLikedSong";
 
 export default function BottomMediaControl() {
@@ -31,9 +34,7 @@ export default function BottomMediaControl() {
     newSongDispatch,
     artist,
   } = useContext(NewSongsContext);
-
   const { user } = useAuthContext();
-
   const bottomCurrentSong = songs.find((song) => song._id === currentSong);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -41,22 +42,19 @@ export default function BottomMediaControl() {
   const [isMuted, setIsMuted] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(1);
 
+  // get the aritst to of the song, to show his name
   useEffect(() => {
-    const fetchArtists = async () => {
-      const response = await fetch("http://localhost:5000/api/artists");
-      const json = await response.json();
-      if (response.ok) {
-        let bottomCurrentArtist = json.find((artist) =>
-          artist.songs.some((song) => song._id === currentSong)
-        );
-        newSongDispatch({ type: "SET_ARTIST", payload: bottomCurrentArtist });
-      } else {
-        console.log(response.status);
-      }
-    };
-    fetchArtists();
+    async function getArtists() {
+      const fetchedArtists = await fetchArtists();
+      let bottomCurrentArtist = fetchedArtists.find((artist) =>
+        artist.songs.some((song) => song._id === currentSong)
+      );
+      newSongDispatch({ type: "SET_ARTIST", payload: bottomCurrentArtist });
+    }
+    getArtists();
   }, [newSongDispatch, currentSong, isPlaying]);
 
+  // each seconds, set the time of the current song to currentTime.
   useEffect(() => {
     const updateCurrentTime = () => {
       const player = playerRefs.current.get(currentSong);
@@ -72,23 +70,15 @@ export default function BottomMediaControl() {
     };
   }, [currentSong, playerRefs, isPlaying]);
 
-  useEffect(() => {
-    const updateWhenDifUser = () => {};
-  }, [user]);
-
   const handleNextSong = () => {
     const currentIndexSongPlaying = songs.findIndex(
       (song) => song._id === currentSong
     );
-
     // Check if the current song is the last one in the list
     if (currentIndexSongPlaying === songs.length - 1) {
-      console.log("This is the last song in the list");
       return;
     }
-
     const nextSong = songs[currentIndexSongPlaying + 1];
-
     newSongDispatch({ type: "SET_SONG", payload: nextSong._id });
     newSongDispatch({ type: "PLAY_SONG" });
   };
@@ -97,15 +87,11 @@ export default function BottomMediaControl() {
     const currentIndexSongPlaying = songs.findIndex(
       (song) => song._id === currentSong
     );
-
     // Check if the current song is the first one in the list
     if (currentIndexSongPlaying === 0) {
-      console.log("This is the first song in the list");
       return;
     }
-
     const previousSong = songs[currentIndexSongPlaying - 1];
-
     newSongDispatch({ type: "SET_SONG", payload: previousSong._id });
     newSongDispatch({ type: "PLAY_SONG" });
   };
@@ -229,7 +215,7 @@ export default function BottomMediaControl() {
               </IconButton>
             </div>
             <div style={{ display: "flex" }}>
-              <div>
+              <div style={{ color: "white" }}>
                 {`${Math.floor(currentTime / 60)}:${
                   Math.floor(currentTime % 60) < 10 ? "0" : ""
                 }${Math.floor(currentTime % 60)}`}
@@ -248,7 +234,7 @@ export default function BottomMediaControl() {
                 }}
               />
 
-              <div>
+              <div style={{ color: "white" }}>
                 {bottomCurrentSong &&
                   `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`}
               </div>
@@ -328,3 +314,20 @@ export default function BottomMediaControl() {
     </Box>
   );
 }
+
+// old
+// // useEffect(() => {
+//   const fetchArtists = async () => {
+//     const response = await fetch("http://localhost:5000/api/artists");
+//     const json = await response.json();
+//     if (response.ok) {
+//       let bottomCurrentArtist = json.find((artist) =>
+//         artist.songs.some((song) => song._id === currentSong)
+//       );
+//       newSongDispatch({ type: "SET_ARTIST", payload: bottomCurrentArtist });
+//     } else {
+//       console.log(response.status);
+//     }
+//   };
+//   fetchArtists();
+// }, [newSongDispatch, currentSong, isPlaying]);

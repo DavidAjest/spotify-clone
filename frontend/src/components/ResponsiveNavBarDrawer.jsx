@@ -21,7 +21,7 @@ function ResponsiveNavBarDrawer(props) {
   // adding player to responsive drawer
 
   const { logout } = useLogout();
-  const { user, dispatch } = useAuthContext();
+  const { user } = useAuthContext();
 
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
