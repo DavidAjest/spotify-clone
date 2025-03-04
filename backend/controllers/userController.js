@@ -47,6 +47,8 @@ const addLikedSong = async (req, res) => {
   console.log("SongId:", songId);
   try {
     const user = await User.findOne({ email });
+
+    // Delete all liked songs, for dev
     // await User.updateOne({ _id: user._id }, { $set: { likedSongs: [] } });
 
     if (!user) {
@@ -57,7 +59,7 @@ const addLikedSong = async (req, res) => {
     }
 
     await User.updateOne({ _id: user._id }, { $push: { likedSongs: songId } });
-    //removed from the res.json ==> , songId
+
     res.status(200).json({ user });
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -71,7 +73,6 @@ const removeLikedSong = async (req, res) => {
   console.log("SongId:", songId);
   try {
     const user = await User.findOne({ email });
-    // await User.updateOne({ _id: user._id }, { $set: { likedSongs: [] } });
 
     if (!user) {
       return res.status(400).json({ error: "no such user" });
@@ -83,7 +84,7 @@ const removeLikedSong = async (req, res) => {
     }
 
     await User.updateOne({ _id: user._id }, { $pull: { likedSongs: songId } });
-    //removed from the res.json ==> , songId
+
     res.status(200).json({ user });
   } catch (e) {
     res.status(400).json({ error: e.message });

@@ -14,6 +14,7 @@ import { NewSongsContext } from "../context/NewSongContext";
 import { useParams } from "react-router-dom";
 // Services
 import { fetchArtistById } from "../services/artistServices";
+import SpinnerLoader from "./SpinnerLoader";
 export default function MediaControlCardAlbum() {
   const { id } = useParams();
   const {
@@ -46,7 +47,7 @@ export default function MediaControlCardAlbum() {
   }, [id, songs]);
 
   if (!artistSongs) {
-    return <div>Loading...</div>;
+    return <SpinnerLoader />;
   }
 
   return (

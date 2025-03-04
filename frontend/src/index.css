@@ -48,32 +48,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-/* button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
 .topic-popular-artists {
   text-align: left;
 }
 
-/* mine css */
-/* before the fixed library */
-/* .container-home-grid {
-  margin-top: 4%;
-  margin-bottom: 1%;
-  display: grid;
-  grid-template: 100% / 30% 69%;
-
-  height: 100vh;
-  width: 100%;
-  gap: 10px;
-  row-gap: 0;
-  box-sizing: border-box; /* Add this line 
-} */
 .container-home-grid {
   position: relative;
   margin-top: 70px;
@@ -99,20 +78,7 @@ button:focus-visible {
   justify-content: end;
   height: 100vh;
   width: 100%;
-
-  /* gap: 13px; */
 }
-/* .container-about-grid {
-  margin-top: 4%;
-  margin-bottom: 1%;
-  display: grid;
-  grid-template-columns: 69%;
-
-  justify-content: end;
-  height: 100vh;
-  width: 100%;
-  /* gap: 13px; 
-} */
 
 .grid-bottom-right-cell-about {
   grid-template: 40% 20% 20% 20% / 80% 13% 7%;
@@ -126,9 +92,6 @@ button:focus-visible {
   border-radius: 10px;
   background: linear-gradient(to bottom right, #282828, #000000);
 }
-/* .card-album-grid-item {
-  background-color: rgb(30, 30, 30);
-} */
 
 .your-library-grid-item {
   /* CHANGED THE PSOTION TO FIXED */
@@ -156,51 +119,7 @@ input {
 .input-volume {
   accent-color: rgb(255, 255, 255);
 }
-/* PlayerDev */
 
-/* .componentPlayerDEV {
-  background-color: white;
-  width: 25%;
-  max-width: 600px;
-  margin: 1em auto;
-  padding-bottom: 2em;
-  border: 0.1px solid black;
-  border-radius: 10px;
-}
-
-.musicCover {
-  border-radius: 10%;
-}
-
-.playButton {
-  background: none;
-  border: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.subTitle {
-  margin-top: -1em;
-  color: #4f4f4f;
-}
-
-.time {
-  margin: 0 auto;
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  color: #828282;
-  font-size: smaller;
-}
-
-.timeline {
-  width: 80%;
-  background-color: #27ae60;
-}
-
-input[type="range"] {
-  background-color: #27ae60;
-} */
 .sliders-albums {
   width: 50%;
 }
@@ -244,8 +163,6 @@ input[type="range"] {
     width: 400px;
   }
 }
-
-/*END PlayerDev */
 
 @media (prefers-color-scheme: light) {
   :root {

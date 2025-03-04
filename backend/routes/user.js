@@ -15,8 +15,9 @@ router.post("/login", loginUser);
 //signup route
 router.post("/signup", signupUser);
 
+//add liked song to user route
 router.post("/addLikedSong", addLikedSong);
 
-//delete liked song from user
+//delete liked song from user route
 router.delete("/removeLikedSong", removeLikedSong);
 module.exports = router;

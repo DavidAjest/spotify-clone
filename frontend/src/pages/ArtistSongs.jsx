@@ -13,6 +13,7 @@ import { fetchArtistById } from "../services/artistServices";
 // CSS
 
 import "../index.css";
+import SpinnerLoader from "../components/SpinnerLoader";
 function ArtistSongs() {
   const { id } = useParams();
   const { artists } = useContext(ArtistsContext);
@@ -33,7 +34,7 @@ function ArtistSongs() {
 
   // If the artist data is not found, display a loading message
   if (!artist) {
-    return <div>loading</div>;
+    return <SpinnerLoader />;
   }
 
   // Render the artist details once the data is found

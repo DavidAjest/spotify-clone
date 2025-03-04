@@ -1,32 +1,28 @@
+// Navigation/URL related
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-// import CssBaseline from "@mui/material/CssBaseline";
 //pages
 import Home from "./pages/Home";
 import ArtistSongs from "./pages/ArtistSongs";
-import { ArtistContextProvider } from "./context/ArtistContext";
 import ArtistAlbum from "./pages/ArtistAlbum";
-
-// Compoenets
-import Navbar from "./components/Navbar";
-import BottomMediaControl from "./components/BottomMediaControl";
-import "./App.css";
-import { NewSongContextProvider } from "./context/NewSongContext.jsx";
-import ResponsiveNavBarDrawer from "./components/ResponsiveNavBarDrawer.jsx";
 import Login from "./pages/Login.jsx";
-import { AuthContextProvider } from "./context/AuthContext.jsx";
 import Signup from "./pages/Signup.jsx";
+// Context
+import { ArtistContextProvider } from "./context/ArtistContext";
+import { NewSongContextProvider } from "./context/NewSongContext.jsx";
+// Compoenets
+import BottomMediaControl from "./components/BottomMediaControl";
+import ResponsiveNavBarDrawer from "./components/ResponsiveNavBarDrawer.jsx";
+//CSS
+import "./App.css";
 
 function App() {
   const { user } = useAuthContext();
   return (
     <div className="App">
-      {/* <AuthContextProvider> */}
       <BrowserRouter>
         <ArtistContextProvider>
           <NewSongContextProvider>
-            {/* <Navbar /> */}
-
             <div className="pages">
               <Routes>
                 {" "}
@@ -63,8 +59,6 @@ function App() {
                     !user ? (
                       <>
                         <Login />
-
-                        {/* <ResponsiveNavBarDrawer /> */}
                       </>
                     ) : (
                       <Navigate to="/home" />
@@ -77,7 +71,6 @@ function App() {
                     !user ? (
                       <>
                         <Signup />
-                        {/* <ResponsiveNavBarDrawer /> */}
                       </>
                     ) : (
                       <Navigate to="/home" />
@@ -86,11 +79,9 @@ function App() {
                 />
               </Routes>
             </div>
-            {/* <BottomMediaControl /> */}
           </NewSongContextProvider>
         </ArtistContextProvider>
       </BrowserRouter>
-      {/* </AuthContextProvider> */}
     </div>
   );
 }

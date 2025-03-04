@@ -15,6 +15,7 @@ import SliderAlbums from "../components/SliderAlbums";
 import { fetchArtists } from "../services/artistServices";
 // CSS
 import "../index.css";
+import SpinnerLoader from "../components/SpinnerLoader";
 
 function Home() {
   const { artists, dispatch } = useContext(ArtistsContext);
@@ -27,6 +28,10 @@ function Home() {
     };
     getAllArtists();
   }, [dispatch]);
+
+  if (!artists) {
+    return <SpinnerLoader />;
+  }
 
   return (
     <main className="container-home-grid">

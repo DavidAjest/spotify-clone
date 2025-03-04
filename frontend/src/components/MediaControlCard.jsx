@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import { NewSongsContext } from "../context/NewSongContext";
 import { useParams } from "react-router-dom";
 import { fetchArtistById } from "../services/artistServices";
+import SpinnerLoader from "./SpinnerLoader";
 export default function MediaControlCard() {
   const { id } = useParams();
   const {
@@ -23,17 +24,6 @@ export default function MediaControlCard() {
   } = useContext(NewSongsContext);
   const [artistSongs, setArtistSongs] = useState();
 
-  // useEffect(() => {
-  //   async function storeAllSongs() {
-  //     const response = await fetch(`http://localhost:5000/api/artists`);
-  //     const json = await response.json();
-  //     const allSongs = json.flatMap((artist) => artist.songs);
-  //     newSongDispatch({ type: "SET_SONGS", payload: allSongs });
-  //   }
-  //   storeAllSongs();
-  // }, [newSongDispatch]); // Add id and artists to the dependency array
-
-  // find the songs that are made by specific artist
   useEffect(() => {
     async function getArtistSongsByArtist() {
       let filteredSongs = songs.filter((song) => song.artists.includes(id));
@@ -47,7 +37,7 @@ export default function MediaControlCard() {
   }, [id, songs]);
 
   if (!artistSongs) {
-    return <div>Loading...</div>;
+    return <SpinnerLoader />;
   }
 
   return (

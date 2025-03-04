@@ -18,7 +18,6 @@ export const authReducer = (state, action) => {
         likedSongs: [...state.likedSongs, action.payload],
       };
     case "REMOVE_LIKED_SONG":
-      console.log("im in reducer REMOVE_LIKED_SONG");
       return {
         ...state,
         likedSongs: state.likedSongs.filter(

@@ -12,7 +12,7 @@ export const fetchArtistById = async (id) => {
       }
     }
   } catch (e) {
-    console.log("bad response Error: ", e);
+    throw Error("bad response, becouse of ", e.message);
   }
 };
 
@@ -52,8 +52,7 @@ export const saveUserLikedSongs = async (email, songId) => {
     console.log(json);
     return json;
   } catch (e) {
-    console.log("Error: ", e);
-    throw e;
+    throw new Error(e.message);
   }
 };
 // removes liked song from user by email, returns user
@@ -77,7 +76,6 @@ export const removeUserLikedSongs = async (email, songId) => {
     console.log(json);
     return json;
   } catch (e) {
-    console.log("Error: ", e);
-    throw e;
+    throw new Error(e.message);
   }
 };

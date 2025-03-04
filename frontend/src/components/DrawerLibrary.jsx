@@ -143,7 +143,7 @@ export default function DrawerLibrary({
                         alignItems: "center",
                       }}
                     >
-                      <Typography component="h7" variant="h7">
+                      <Typography component="h6" variant="h6">
                         {song.title}
                       </Typography>
 

@@ -1,38 +1,9 @@
 const songModel = require("../models/songModel");
-const Artist = require("../models/artistModel");
 
-const createSong = async (req, res) => {
-  try {
-    const song = await songModel.create({ ...req.body });
-    console.log("The song that was created: ", song);
-
-    for (const artistId of song.artists) {
-      await Artist.findByIdAndUpdate(
-        artistId,
-        { $push: { songs: song._id } },
-        { new: true, useFindAndModify: false }
-      );
-    }
-
-    res.status(200).json(song);
-  } catch (error) {
-    res.status(404).json(error);
-  }
-};
 const showAllSongs = async (req, res) => {
   try {
     const songs = await songModel.find();
     res.status(200).json(songs);
-  } catch (error) {
-    res.status(404).json(error);
-  }
-};
-
-const deleteSong = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedSong = await songModel.deleteOne({ _id: id });
-    res.status(200).json(deletedSong);
   } catch (error) {
     res.status(404).json(error);
   }
@@ -48,27 +19,45 @@ const showSongById = async (req, res) => {
   }
 };
 
-const updateSong = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const song = await songModel.findByIdAndUpdate(
-      id,
-      { ...req.body },
-      { new: true }
-    );
-    res.status(200).json(song);
-  } catch (error) {
-    res.status(404).json(error);
-  }
+module.exports = {
+  // createSong,
+  showAllSongs,
+  // deleteSong,
+  showSongById,
+  // updateSong,
 };
+
+// Not used in the real spotify app, as a regular user.
+// const deleteSong = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const deletedSong = await songModel.deleteOne({ _id: id });
+//     res.status(200).json(deletedSong);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// };
+// const updateSong = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const song = await songModel.findByIdAndUpdate(
+//       id,
+//       { ...req.body },
+//       { new: true }
+//     );
+//     res.status(200).json(song);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// };
 // ADDING SONG TO ARTIST
-const addArtistToSong = function (tutorialId, tag) {
-  return db.Tutorial.findByIdAndUpdate(
-    tutorialId,
-    { $push: { tags: tag._id } },
-    { new: true, useFindAndModify: false }
-  );
-};
+// const addArtistToSong = function (tutorialId, tag) {
+//   return db.Tutorial.findByIdAndUpdate(
+//     tutorialId,
+//     { $push: { tags: tag._id } },
+//     { new: true, useFindAndModify: false }
+//   );
+// };
 
 // const songSchema = new Schema({
 //     title: { type: String, required: true },
@@ -86,11 +75,21 @@ const addArtistToSong = function (tutorialId, tag) {
 //       required: true,
 //     },
 //   });
+// const createSong = async (req, res) => {
+//   try {
+//     const song = await songModel.create({ ...req.body });
+//     console.log("The song that was created: ", song);
 
-module.exports = {
-  createSong,
-  showAllSongs,
-  deleteSong,
-  showSongById,
-  updateSong,
-};
+//     for (const artistId of song.artists) {
+//       await Artist.findByIdAndUpdate(
+//         artistId,
+//         { $push: { songs: song._id } },
+//         { new: true, useFindAndModify: false }
+//       );
+//     }
+
+//     res.status(200).json(song);
+//   } catch (error) {
+//     res.status(404).json(error);
+//   }
+// };

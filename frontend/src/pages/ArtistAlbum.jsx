@@ -5,13 +5,15 @@ import { useParams } from "react-router-dom";
 // MUI Components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import MediaControlCardAlbum from "../components/MediaControlCardAlbum";
 // Context
 import { ArtistsContext } from "../context/ArtistContext";
 // Services
 import { fetchArtistById } from "../services/artistServices";
 // CSS
 import "../index.css";
+// Components
+import MediaControlCardAlbum from "../components/MediaControlCardAlbum";
+import SpinnerLoader from "../components/SpinnerLoader";
 
 function ArtistSongs() {
   const { id } = useParams();
@@ -33,9 +35,9 @@ function ArtistSongs() {
   }, [id, artists]);
 
   // If the artist data is not found, display a loading message
-  if (!artist) {
-    return <div>Loading...</div>;
-  }
+  // if (!artist) {
+  //   return <SpinnerLoader />;
+  // }
 
   return (
     <main>
