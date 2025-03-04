@@ -10,7 +10,7 @@ This is a Spotify clone application built using the MERN stack (MongoDB, Express
 - Node.js
 - npm or yarn
 - MongoDB
-- React
+- React vite
 
 ## Setup
 
