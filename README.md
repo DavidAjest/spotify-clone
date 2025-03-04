@@ -24,13 +24,16 @@ npm install
  MONGODB_URI=your_mongodb_uri
 SPOTIFY_CLIENT_ID=your_spotify_client_id
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+4 Start the backend development server:
+nodemon server.js
 
-
+### Frontend
 1. Navigate to the frontend directory:
 cd frontend
 2.Install the dependencies:
 npm install
 3 Start the frontend development server:
 npm run dev
-3.2 Start the backend development server:
-nodemon server.js
+
+
+
