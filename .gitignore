@@ -1,41 +1,12 @@
-# # Logs
-# logs
-# *.log
-# npm-debug.log*
-# yarn-debug.log*
-# yarn-error.log*
-# pnpm-debug.log*
-# lerna-debug.log*
+node_modules directories:
 
-node_modules
-# frontend/node_modules
+node_modules in the root directory
+node_modules in the frontend directory
+Backend environment files:
 
-# dist
-# dist-ssr
-# *.local
+.env
+backend/.env.local
+backend/.env.development
 
-# # Environment files
-# .env
-# .env.local
-# .env.development
-# .env.test
-# .env.production
 
-# # Backend environment files
-# backend/.env
-# backend/.env.local
-# backend/.env.development
-# backend/.env.test
-# backend/.env.production
-
-# # Editor directories and files
-# .vscode/*
-# !.vscode/extensions.json
-# .idea
-# .DS_Store
-# *.suo
-# *.ntvs*
-# *.njsproj
-# *.sln
-# *.sw?
-node_modules
+.env
